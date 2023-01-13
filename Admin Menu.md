@@ -1,5 +1,3 @@
-# Snipe Admin Menu
-
 # Permissions
 - In Config folder check `permissions.lua`, there are options to set if the particular role for god, admin or mod can access all the panels.
 
@@ -11,9 +9,9 @@ There are unlimited options
 
 If you have a new role, you can add it here and select to give either it any value you want and it will be available in the settings tab for god roles to select the panels for them.
 
-eg. ["new_role"] = "God",
+eg. `["new_role"] = "God",`
 
-eg. ["dev"] = "Admin",
+eg. `["dev"] = "Admin",`
 
 ```lua
 Config.GodRoles = {
