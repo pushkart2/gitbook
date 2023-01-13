@@ -1,3 +1,3 @@
 # Table of contents
 
-* [Admin Menu](README.md)
+* [Admin Menu](adminmenu.md)
