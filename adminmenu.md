@@ -165,6 +165,7 @@ exports('SetAdmin', SetAdmin)
 ```
 
 - It should look like this
+
 ![alt text](https://cdn.discordapp.com/attachments/739152437645934632/1082684277742907473/ox_1.png)
 
 
