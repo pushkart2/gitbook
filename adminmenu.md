@@ -155,7 +155,7 @@ else return end -- comment this line
 ![alt text](https://cdn.discordapp.com/attachments/704682484847345738/1054804324234051684/ox-inv-player.png)
 
 - Another Change
-- Add this following snippet at the top of the client.lua files in ox_inventory
+- Add this following snippet at the top of the ox_inventory/client.lua
 ```lua
 local isAdmin = false
 function SetAdmin()
@@ -211,7 +211,7 @@ end
 
 - More Changes
 - Looks for function `client.openInventory(inv, data)`
-- add the two following lines mentioned in the snippet below
+- add the two following lines mentioned in the snippet below inside that function
 
 ```lua
 if not isAdmin then -- add this line
