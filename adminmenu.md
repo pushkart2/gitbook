@@ -91,6 +91,49 @@ else
 ```
 ![alt text](https://cdn.discordapp.com/attachments/704682484847345738/1054804324540239892/ox-inv-trunk-glove.png)
 
+## Changes in ox_inventory/modules/inventory/server.lua
+
+- Look for function `loadInventoryData()` around line 54.
+- 3 lines in that function needs to be changed
+
+```lua
+if not inventory then
+local entity
+
+if data.netid then
+	entity = NetworkGetEntityFromNetworkId(data.netid)
+
+	if not entity and not exports["snipe-menu"]:isAdmin(source) then -- line changed
+		return shared.info('Failed to load vehicle inventory data (no entity exists with given netid).')
+	end
+else
+	local vehicles = GetAllVehicles()
+
+	for i = 1, #vehicles do
+		local vehicle = vehicles[i]
+		local _plate = GetVehicleNumberPlateText(vehicle)
+
+		if _plate:find(plate) then
+			entity = vehicle
+			data.netid = NetworkGetNetworkIdFromEntity(entity)
+			break
+		end
+	end
+
+	if not entity and not exports["snipe-menu"]:isAdmin(source) then -- line changed
+		return shared.info('Failed to load vehicle inventory data (no entity exists with given plate).')
+	end
+end
+
+if not source then
+	source = NetworkGetEntityOwner(entity)
+
+	if not source and not exports["snipe-menu"]:isAdmin(source) then -- line changed
+		return shared.info('Failed to load vehicle inventory data (entity is unowned).')
+	end
+end
+```
+
 ## Ox Inventory Player Inventory For Both QBCore and ESX
 - For opening player inventories, find the following lines in ox_inventory/server.lua under the following callback `lib.callback.register('ox_inventory:openInventory', function(source, inv, data)`
 
@@ -112,7 +155,7 @@ else return end -- comment this line
 ![alt text](https://cdn.discordapp.com/attachments/704682484847345738/1054804324234051684/ox-inv-player.png)
 
 - Another Change
-- Go to ox_inventory/client.lua and look for this line  `client.interval = SetInterval(function()` near line 1120 or something depends on your changes and add the following block of code above that line and it should look like this
+- Add this following snippet at the top of the client.lua files in ox_inventory
 ```lua
 local isAdmin = false
 function SetAdmin()
@@ -120,9 +163,12 @@ function SetAdmin()
 end
 exports('SetAdmin', SetAdmin)
 ```
-![alt text](https://cdn.discordapp.com/attachments/704682484847345738/1054828985013514310/set-admin.png)
 
-- Inside the same SetInterval, add the 3 lines as mentioned(Do not copy the logic as is, just copy the lines mentioned)
+- It should look like this
+![alt text](https://cdn.discordapp.com/attachments/739152437645934632/1082684277742907473/ox_1.png)
+
+
+- Inside the SetInterval, add the 3 lines as mentioned(Do not copy the logic as is, just copy the lines mentioned)
 ```lua
 client.interval = SetInterval(function()
 if invOpen == false then
@@ -161,6 +207,18 @@ elseif invOpen == true then
 	end
 end		
 ```	
+
+- More Changes
+- Looks for function `client.openInventory(inv, data)`
+- add the two following lines mentioned in the snippet below
+
+```lua
+if not isAdmin then -- add this line
+	if not targetCoords or #(targetCoords - GetEntityCoords(playerPed)) > 1.8 or not (client.hasGroup(shared.police) or canOpenTarget(targetPed))  then
+		return lib.notify({ id = 'inventory_right_access', type = 'error', description = locale('inventory_right_access') })
+	end
+end -- add this line
+```
 
 
 # QBCore
