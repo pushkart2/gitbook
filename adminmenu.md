@@ -334,6 +334,17 @@ exports["snipe-menu"]:isDevMode()
 exports["snipe-menu"]:isDevMode(source)
 ```
 
+## Admin Perms Exports
+- You are provided with two exports, one on client and one server to check if a person has Admin perms
+- Usage (Client)
+```lua
+exports["snipe-menu"]:isAdmin()
+```
+- Usage (Server). Here source is the source/playerid for player
+```lua
+exports["snipe-menu"]:isAdmin(source)
+```
+
 # Files that are open to edit
 
 -   `'config/config.lua',`
