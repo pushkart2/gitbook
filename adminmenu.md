@@ -134,7 +134,16 @@ if not source then
 end
 ```
 
-## Ox Inventory Player Inventory For Both QBCore and ESX
+# Ox Inventory Player Inventory For Both QBCore and ESX
+
+## If you use the latest Ox inventory, you dont need to make the changes mentioned below. Just go to cl_customise and look for `snipe-menu:client:openinventory` event. Comment and uncomment the lines based on the comment there. 
+
+# 
+
+## Else follow the steps below
+# 
+
+
 - For opening player inventories, find the following lines in ox_inventory/server.lua under the following callback `lib.callback.register('ox_inventory:openInventory', function(source, inv, data)`
 
 ```lua
@@ -279,6 +288,32 @@ AddEventHandler('playerConnecting', function(name, setCallback, deferrals)
 	else
 		deferrals.done('There was an error loading your character!\nError code: identifier-missing\n\nThe cause of this error is not known, your identifier could not be found. Please come back later or report this problem to the server administration team.')
 	end
+end)
+```
+
+If you use multicharacter script (esx-multicharacter), make the following changes in `esx-multicharacter/server/main.lua`
+```lua
+AddEventHandler('playerConnecting', function(playerName, setKickReason, deferrals)
+    deferrals.defer()
+    local playerId = source
+    local identifier = GetIdentifier(source)
+
+    Wait(100)
+    local isBanned, Reason = exports["snipe-menu"]:IsPlayerBanned(playerId) -- added
+    if identifier then
+        if ESX.Players[identifier] then
+            deferrals.done(('A player is already connected to the server with this identifier.\nYour identifier: %s:%s'):format(PRIMARY_IDENTIFIER, identifier))
+        else
+            if isBanned then -- added
+                deferrals.done(Reason) -- added
+            else -- added
+                deferrals.done()
+            end -- added
+        --    deferrals.done()
+        end
+    else
+        deferrals.done(('Unable to retrieve player identifier.\nIdentifier type: %s'):format(PRIMARY_IDENTIFIER))
+    end
 end)
 ```
 
