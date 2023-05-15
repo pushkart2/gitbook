@@ -1,3 +1,6 @@
+# Important 
+
+## DO NOT DELETE `ignore.json` file in JSON folder
 # Config
 
 if you use ESX, make sure to change the config to look like this:
