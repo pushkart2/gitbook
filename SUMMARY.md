@@ -5,3 +5,4 @@
 * [Winery](winery.md)
 * [Printer](printer.md)
 * [Meth](meth.md)
+* [Beekeeping](beekeeping.md)
