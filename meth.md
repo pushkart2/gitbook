@@ -9,7 +9,7 @@
 
 # For QB Inventory
 
-## Add the following items
+## Items
 ```lua
 ["methtable"]= {["name"] = "methtable", ["label"] = "Meth Table", 		["weight"] = 2000, 		["type"] = "item", 		["image"] = "methtable.png", ["unique"] = true, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "A Table"},
 ["methbag"]= {["name"] = "methbag", ["label"] = "Meth Bag", 		["weight"] = 1000, 		["type"] = "item", 		["image"] = "meth10g.png", ["unique"] = true, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Meth Bag"},
@@ -54,7 +54,7 @@ elseif itemData["name"] == "methbag" then
 
 # For OX Inventory
 
-## Add the following items. You can change the description, weight, etc but do not change stack and client and item name.
+## Items
 ```lua
 ['methtable'] = {
     label = 'Meth Table',
@@ -84,7 +84,7 @@ elseif itemData["name"] == "methbag" then
 
 # For Quasar inventory
 
-## Add the following items
+## Items
 ```lua
 ["methtable"]= {
     ["name"] = "methtable", 
