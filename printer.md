@@ -28,6 +28,7 @@ Config.Printer = {
 |printer.ogg|_interact-sound/client/html/sounds_|
 |a4sheets.png|_linden_inventory/html/images_|
 |printerdocument.png|_linden_inventory/html/images_|
+
 # For Linden Inventory
 
 - Add items in **linden_inventory/shared/items.lua**, code snippet is given below
