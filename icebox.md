@@ -102,9 +102,9 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
         ['combinable'] = nil,
         ['description'] = 'none'
     },
-	```
+```
 
-## ox inventory
+## OX inventory
 - if you add more chains, make sure to follow the export and everything properly so it triggers the export on use of the chain
 ```lua
     ["clothing_chain"] = {
@@ -153,7 +153,7 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
         stack = true,
         close = true,
     },
-    ```
+```
 
 # Clothing Changes
 
