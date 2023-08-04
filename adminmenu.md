@@ -180,7 +180,21 @@ AddEventHandler('playerConnecting', function(playerName, setKickReason, deferral
 end)
 ```
 
-# Step 6 (Optional)
+# Step 6 (QB weathersync)
+
+- if you use qb-weathersync, make the following changes in qb-weathersync/server/main.lua
+```lua
+local function isAllowedToChange(src)
+    if src == 0 or QBCore.Functions.HasPermission(src, "admin") or IsPlayerAceAllowed(src, 'command') or exports["snipe-menu"]:isAdmin(src) then
+        return true
+    end
+    return false
+end
+```
+
+Replace this function.
+
+# Step 7 (Optional)
 ## How To add new UI Locales
 - Please read each step properly. 
 - To create a new locale, for eg. in language spanish, create a new file in html/locales called for eg. sp.json
@@ -204,7 +218,7 @@ end)
 - There are bunch of client/server scripts which are unencrypted which you can edit it to your liking. 
 - I wont be adding supports for other paid scripts but the logic required to edit will be made open if needed.
 
-# Step 7 (Optional Exports)
+# Step 8 (Optional Exports)
 ## Dev Mode Exports
 - You are provided with two exports, one on client and one server to check if a person is in dev mode
 - Usage (Client)
