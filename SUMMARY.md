@@ -7,3 +7,4 @@
 * [Printer](printer.md)
 * [Meth](meth.md)
 * [Beekeeping](beekeeping.md)
+* [Blips](blips.md)
