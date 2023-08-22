@@ -46,7 +46,9 @@ end
 
 ### Ox inventory (only if you are using QBCore)
 
-ox - https://github.com/overextended/ox_inventory/blob/main/client.lua#L966
+Look for `TriggerEvent('esx:removeInventoryItem', item.name, item.count)` in ox_inventory/client.lua. Add the following snippet on the highlighted line.
+
+![Alt text](https://cdn.discordapp.com/attachments/739152437645934632/1143554178191466666/image.png)
 
 Add this line at the lines mentioned
 ```lua
