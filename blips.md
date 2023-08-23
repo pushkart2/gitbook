@@ -37,7 +37,7 @@ lj - https://github.com/loljoshie/lj-inventory/blob/main/server/main.lua#L209
 
 Add this line at the lines mentioned
 ```lua
-if item.name == "tracker" or item.name == "gangtracker" then -- if you have named the item something else, change it here
+if item == "tracker" or item == "gangtracker" then -- if you have named the item something else, change it here
     TriggerClientEvent("snipe-blips:client:RemoveTrackerItem", source)
 end
 ```
