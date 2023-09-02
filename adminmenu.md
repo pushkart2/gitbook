@@ -134,7 +134,7 @@ end
 ```lua
 AddEventHandler('playerConnecting', function(name, setCallback, deferrals)
 	deferrals.defer()
-	local playerId = source
+	local playerId = source 
 	local identifier = ESX.GetIdentifier(playerId)
 	Wait(100)
 	local isBanned, Reason = exports["snipe-menu"]:IsPlayerBanned(playerId) -- added
@@ -158,7 +158,7 @@ If you use multicharacter script (esx-multicharacter), make the following change
 ```lua
 AddEventHandler('playerConnecting', function(playerName, setKickReason, deferrals)
     deferrals.defer()
-    local playerId = source
+    local playerId = source -- added
     local identifier = GetIdentifier(source)
 
     Wait(100)
