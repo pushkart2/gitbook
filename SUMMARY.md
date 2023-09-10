@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Admin Menu](adminmenu.md)
+* [Banking](banking.md)
 * [IceBox](icebox.md)
 * [Owned Shops](ownedshops.md)
 * [Winery](winery.md)
