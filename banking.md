@@ -10,6 +10,11 @@
 - `Config.DefaultIdentifier` is the identifier to whom the loans will be transferred when a player who gave out loans, deletes his character.
 - Read through the comments for other config options properly before making changes.
 
+## JOB Accounts
+- snipe-banking has the option to automatically detect the jobs on every server restart and create an entry for it in the database so you dont have to manually add anything in there.
+- If you are using QBCore, just make sure you add a `isboss = true` for any job/gang grade in your jobs.lua file and it will automatically detect it as a job account.
+- If you are using ESX, just set one of the grade names as `boss` and it will automatically detect it as a job account. 
+
 ## QB-Management Conversion (Only if you use qb-managament.) DO NOT MAKE THIS CHANGES IF YOU USE renewed-banking
 - Look for the things on left in your scripts and replace it to the ones on right.
 - This change is important if you use qb-management or your money will be added to management_funds instead of the my database.
