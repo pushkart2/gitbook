@@ -16,23 +16,32 @@
 - If you are using ESX, just set one of the grade names as `boss` and it will automatically detect it as a job account. 
 
 ## QB-Management Conversion (Only if you use qb-managament.) DO NOT MAKE THIS CHANGES IF YOU USE renewed-banking
-- Look for the things on left in your scripts and replace it to the ones on right.
-- This change is important if you use qb-management or your money will be added to management_funds instead of the my database.
 - Restart the server. Make sure nobody connects the server.
 - Run the command `convertqbmanagement` in your server console once the server is up.
-- This will also move all the job money from bank_accounts_new into my database.
+- This will also move all the job money from management_funds into my database.
 - Restart the server again.
-- Make sure to do the following export changes!!
+- Go to qb-management/fxmanifest.lua and comment the following code. It should look like this.
 
 ```lua
-exports['qb-management']:GetAccount => exports['snipe-banking']:GetAccount
-exports['qb-management']:AddMoney => exports['snipe-banking']:GetAccount
-exports['qb-management']:RemoveMoney => exports['snipe-banking']:RemoveMoney
-exports['qb-management']:GetGangAccount=> exports['snipe-banking']:GetGangAccount
-exports['qb-management']:AddGangMoney=> exports['snipe-banking']:AddGangMoney
-exports['qb-management']:RemoveGangMoney=> exports['snipe-banking']:RemoveGangMoney
+-- server_exports {
+--     'AddMoney',
+--     'AddGangMoney',
+--     'RemoveMoney',
+--     'RemoveGangMoney',
+--     'GetAccount',
+--     'GetGangAccount',
+-- }
 ```
 
+- Go to qb-management/client/cl_boss.lua and comment the following code.
+
+![alt text](https://cdn.discordapp.com/attachments/739152437645934632/1150546483876220928/image.png)
+
+- Go to qb-management/client/cl_gang.lua and comment the following code.
+
+![alt text](https://cdn.discordapp.com/attachments/739152437645934632/1150546752139694153/image.png)
+
+- This will make sure the jobs wont be able to deposit/withdraw money from management_funds and will use my database instead.
 ## Renewed Banking
 - Restart the server. Make sure nobody connects the server.
 - Run the command `convertrenewed` in your server console once the server is up.
@@ -217,3 +226,5 @@ end
 2. **Why are the money in bank account for job different from the money in the society account (ONLY ESX)?**
 - Banking system doesnt support society accounts. I store my account money seperately which can be accessed only through bank ui. The reason for that being, society accounts are handled through 3-4 different scripts and has a lot of dependencies in ESX. If I were to change the files, it would be a lot of headache and very difficult to maintain in the long run. You are free to turn off the bank job accounts through config for ESX. It is by default on for QBCore.
 
+3. **Why is my money deposited by jobs in their management menu not showing in the bank? (ONLY QBCore)**
+- You did not follow the steps mentioned under qb-management section above. Jobs should not be able to deposit/withdraw money from the management menu, but they should be using bank instead.
