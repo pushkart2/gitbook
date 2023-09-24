@@ -195,6 +195,8 @@ local function FlaggedAccount()
         job = {"police"} -- has to match the recipientList in sv_dispatchcodes.lua
     })
 end
+
+exports("FlaggedAccount", FlaggedAccount)
 ```
 
 
@@ -203,6 +205,9 @@ end
 
 | Server Exports | Description |
 | :--- | --- |
+| GetAccountBalance(job/gang) | Returns the account money for the job/gang. |
+| AddMoneyToAccount(job/gang, amount) | Adds money to the job/gang account. This doesnt register the transaction, you need to use the exports below to create a transaction to show on ui |
+| RemoveMoneyFromAccount(job/gang, amount) | Removes money from the job/gang account. This doesnt register the transaction, you need to use the exports below to create a transaction to show on ui |
 | IsAccountFlaggedForPlayerId(playerId)  | Returns true if the player's account is flagged. Parameter required is `player source id` |
 | IsAccountFlaggedForIdentifier(playerIdentifier) | Returns true if the player's account is flagged. Parameter required is `player Identifier` (citizenid for qbcore and charid for esx). |
 | IsAccountFrozenForPlayerId(playerId) | Returns true if the player's account is flagged. Parameter required is `player source id`. |
@@ -215,6 +220,9 @@ end
 | :--- | --- |
 | IsAccountFlagged() | Returns true if the player's account is flagged. |
 | IsAccountFrozen() | Returns true if the player's account is Frozen. |
+| DoProgress(boolean) | Usage `exports["snipe-banking"]:DoProgress(true)` to show the progress bar and then open BANK UI and `exports["snipe-banking"]:DoProgress(false)` to show progressbar and then open ATM UI. |
+| OpenBank() | Usage `exports["snipe-banking"]:OpenBank()` to open the bank ui without progressbar. |
+| OpenATM() | Usage `exports["snipe-banking"]:OpenATM()` to open the atm ui without progressbar. |
 
 
 ## FAQ
