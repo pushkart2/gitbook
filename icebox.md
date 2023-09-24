@@ -18,7 +18,10 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
 ```lua
 	["prop_chain"]						 = {["name"] = "prop_chain", 						["label"] = "Chain as Prop", 			["weight"] = 0, 		["type"] = "item", 		["image"] = "prop_chain.png", 					["unique"] = true, 	["useable"] = true, 	["shouldClose"] = true,	   		["combinable"] = nil,   ["description"] = "Example Chain for Prop"},
 	["clothing_chain"]						 = {["name"] = "clothing_chain", 						["label"] = "Chain as Clothing", 	["weight"] = 0, 		["type"] = "item", 		["image"] = "clothing_chain.png", 					["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   		["combinable"] = nil,   ["description"] = "Example Chain for Clothing item"},
+    ["clothing_watch"]						 = {["name"] = "clothing_watch", 						["label"] = "Watch as Clothing", 	["weight"] = 0, 		["type"] = "item", 		["image"] = "clothing_watch.png", 					["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   		["combinable"] = nil,   ["description"] = "Example Watch for Clothing item"},
 	["ruby"]						 = {["name"] = "ruby", 						["label"] = "Ruby", 				["weight"] = 0, 		["type"] = "item", 		["image"] = "ruby.png", 				["unique"] = false, 	["useable"] = false, 	["shouldClose"] = true,	   		["combinable"] = nil,   ["description"] = "Ruby"},
+    ["buff_diamond"]						 = {["name"] = "buff_diamond", 						["label"] = "Diamond(Buff)", 				["weight"] = 0, 		["type"] = "item", 		["image"] = "diamond.png", 				["unique"] = false, 	["useable"] = false, 	["shouldClose"] = true,	   		["combinable"] = nil,   ["description"] = "Diamonds use to buff chains/watches"},
+    ["buff_ruby"]						 = {["name"] = "buff_ruby", 						["label"] = "Ruby(Buff)", 				["weight"] = 0, 		["type"] = "item", 		["image"] = "ruby.png", 				["unique"] = false, 	["useable"] = false, 	["shouldClose"] = true,	   		["combinable"] = nil,   ["description"] = "Ruby use to buff chains/watches"},
     ['real_chain_tester'] = { ['name'] = 'real_chain_tester', ['label'] = 'Chain Tester (Real)', ["description"] = "Chain Tester which will let you test chain for other people", ['weight'] = 500, ['type'] = 'item', ['image'] = 'tester.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none' },
     ['fake_chain_tester'] = { ['name'] = 'fake_chain_tester', ['label'] = 'Chain Tester (Fake)', ["description"] = "Chain Tester which will let you test chain for other people", ['weight'] = 500, ['type'] = 'item', ['image'] = 'tester.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none' },
 ```
@@ -51,13 +54,25 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
         ['combinable'] = nil,
         ['description'] = 'none'
     },
+    ['clothing_watch'] = {
+        ['name'] = 'clothing_watch',
+        ['label'] = 'Watch as Clothing',
+        ['weight'] = 500,
+        ['type'] = 'item',
+        ['image'] = 'clothing_watch.png',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = 'none'
+    },
 
     ['diamond'] = {
-        ['name'] = 'clothing_chain',
+        ['name'] = 'diamond',
         ['label'] = 'Diamond',
         ['weight'] = 500,
         ['type'] = 'item',
-        ['image'] = 'clothing_chain.png',
+        ['image'] = 'diamond.png',
         ['unique'] = true,
         ['useable'] = true,
         ['shouldClose'] = false,
@@ -66,11 +81,37 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
     },
 
     ['ruby'] = {
-        ['name'] = 'clothing_chain',
+        ['name'] = 'ruby',
         ['label'] = 'Ruby',
         ['weight'] = 500,
         ['type'] = 'item',
-        ['image'] = 'clothing_chain.png',
+        ['image'] = 'ruby.png',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = 'none'
+    },
+
+    ['buff_diamond'] = {
+        ['name'] = 'buff_diamond',
+        ['label'] = 'Diamond(Buff)',
+        ['weight'] = 500,
+        ['type'] = 'item',
+        ['image'] = 'diamond.png',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = 'none'
+    },
+
+    ['buff_ruby'] = {
+        ['name'] = 'buff_ruby',
+        ['label'] = 'Ruby(Buff)',
+        ['weight'] = 500,
+        ['type'] = 'item',
+        ['image'] = 'ruby.png',
         ['unique'] = true,
         ['useable'] = true,
         ['shouldClose'] = false,
@@ -102,9 +143,9 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
         ['combinable'] = nil,
         ['description'] = 'none'
     },
-```
+	```
 
-## OX inventory
+## ox inventory
 - if you add more chains, make sure to follow the export and everything properly so it triggers the export on use of the chain
 ```lua
     ["clothing_chain"] = {
@@ -128,6 +169,17 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
         }
     },
 
+    ["clothing_watch"] = {
+        label = "Clothing Watch",
+        weight = 1,
+        stack = false,
+        close = true,
+        consume = 0,
+        server = {
+            export = 'snipe-icebox.useWatch',
+        }
+    },
+
     ["diamond"] = {
         label = "Diamond",
         weight = 1,
@@ -141,6 +193,21 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
         stack = true,
         close = true,
     },
+
+    ["buff_diamond"] = {
+		label = "Buff Diamond",
+		weight = 1,
+		stack = true,
+		close = true,
+	},
+    
+    ["buff_ruby"] = {
+		label = "Buff Ruby",
+		weight = 1,
+		stack = true,
+		close = true,
+	},
+
     ["real_chain_tester"] = {
         label = "Chain Tester (Real)",
         weight = 1,
@@ -153,36 +220,12 @@ TriggerClientEvent("snipe-icebox:client:removeItem", source, item) -- add this l
         stack = true,
         close = true,
     },
-```
-
-# Clothing Changes
-
-## Illenium-appearance
-
-### Add this line `exports["snipe-icebox"]:RemoveChains()` below the following lines
-
-- `RegisterNetEvent("illenium-appearance:client:changeOutfit", function(data)` in client/client.lua
-- `RegisterNetEvent("illenium-appearance:client:reloadSkin", function(bypassChecks)` in client/client.lua
-- `function client.startPlayerCustomization(cb, conf)` in game/customization.lua
-
-## qb-clothing
-
-### Add this line `exports["snipe-icebox"]:RemoveChains()` below the following lines
-
-- `function openMenu(allowedMenus)` in client/main.lua
-- `AddEventHandler('qb-clothing:client:loadOutfit', function(oData)` in client/main.lua
-
-## Others
-
-- If you use any other clothing skin, make sure to add the RemoveChains() export when you change your outfit, go into clothing menu, reload skin. 
-- I mean these changes are not really required but if you use chain as clothing item and people save the outfit, the chain will be saved as well in the outfits. So its advisable to do that.
-- I will try to add support for as many clothing scripts I can but if they are encrypted, you will have to reach out to author of the scripts to add the export.
+    ```
 
 # Optional changes
 
 - If you use chains as props, its advisable to remove chain when a player enters or leaves an apartment or a house. 
 - Whenever player enter the house, just add this exports `exports["snipe-icebox"]:RemoveChains()` and the same export when they leave the house so there is no tornado effect when they sit in the car. 
-- If you intend to use only clothing as chains, you can ignore this but I would 100% advise to do the clothing changes.
 
 # Known Issues
 
