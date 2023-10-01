@@ -228,6 +228,11 @@ local function DeleteCharacter(source, charid)
 end
 ```
 
+### Conversion Command
+- Restart the server. Make sure nobody connects the server.
+- Run the command `convertesxsociety` in your server console once the server is up.
+- This will also move all the job money from addon_account_data into my database.
+- Restart the server again.
 
 ## Dispatch Changes
 ### Moz Dispatch
