@@ -152,7 +152,7 @@ function CreateAddonAccount(name, owner, money)
 end
 ```
 
-Also, Remove the whole event that says `onResourceStart` and replace it with the following code. Check The Screenshot on how it should look
+Also in esx_addonaccounts/server/main.lua, Remove the whole event that says `onResourceStart` and replace it with the following code. Check The Screenshot on how it should look
 
 ```lua
 
