@@ -101,6 +101,103 @@ function self.getAccount(account)
 end
 ```
 
+
+### Changes in esx_addonaccounts
+
+Replace this in esx_addonaccount/server/classes/addonaccount.lua
+```lua
+local function TrimString(name)
+	-- remove word society_ from name
+	return name:sub(9)
+end
+function CreateAddonAccount(name, owner, money)
+	local self = {}
+
+	self.name  = name
+	self.job  = TrimString(name)
+	self.owner = owner
+	self.money = exports["snipe-banking"]:GetAccountBalance(self.job)
+
+	function self.addMoney(m)
+		self.money = self.money + m
+		self.save()
+		exports["snipe-banking"]:AddMoneyToAccount(self.job, m)
+	end
+
+	function self.removeMoney(m)
+		self.money = self.money - m
+		self.save()
+		exports["snipe-banking"]:RemoveMoneyFromAccount(self.job, m)
+	end
+
+	function self.setMoney(m)
+		self.money = m
+		self.save()
+		exports["snipe-banking"]:SetAccountMoney(self.job, m)
+	end
+
+	function self.save()
+		-- if self.owner == nil then
+		-- 	MySQL.update('UPDATE addon_account_data SET money = ? WHERE account_name = ?', {self.money, self.name})
+		-- else
+		-- 	MySQL.update('UPDATE addon_account_data SET money = ? WHERE account_name = ? AND owner = ?', {self.money, self.name, self.owner})
+		-- end
+
+		
+		TriggerClientEvent('esx_addonaccount:setMoney', -1, self.job, self.money)
+
+	end
+
+	return self
+end
+```
+
+Also, Remove the whole event that says `onResourceStart` and replace it with the following code. Check The Screenshot on how it should look
+
+```lua
+
+AddEventHandler('onResourceStart', function(resourceName)
+	if resourceName == GetCurrentResourceName() then
+		local accounts = MySQL.query.await('SELECT * FROM addon_account LEFT JOIN addon_account_data ON addon_account.name = addon_account_data.account_name UNION SELECT * FROM addon_account RIGHT JOIN addon_account_data ON addon_account.name = addon_account_data.account_name')
+		
+		local newAccounts = {}
+		for i = 1, #accounts do
+			local account = accounts[i]
+			if account.shared == 0 then
+				if not Accounts[account.name] then
+					AccountsIndex[#AccountsIndex + 1] = account.name
+					Accounts[account.name] = {}
+				end
+				Accounts[account.name][#Accounts[account.name] + 1] = CreateAddonAccount(account.name, account.owner, account.money)
+			end
+		end
+
+		if next(newAccounts) then
+			MySQL.prepare('INSERT INTO addon_account_data (account_name, money) VALUES (?, ?)', newAccounts)
+			for i = 1, #newAccounts do
+				local newAccount = newAccounts[i]
+				SharedAccounts[newAccount[1]] = CreateAddonAccount(newAccount[1], nil, 0)
+			end
+		end
+
+	end
+end)
+
+CreateThread(function()
+	-- wait until snipe-banking starts
+	while not GetResourceState('snipe-banking') == 'started' do
+		Wait(100)
+	end
+	Wait(2000)
+	local accounts = exports["snipe-banking"]:GetJobGangAccounts()
+	for k, v in pairs(accounts) do
+	local accountName = "society_"..k
+		SharedAccounts[accountName] = CreateAddonAccount(accountName, nil, v)
+	end
+end)
+```
+![Alt text](https://cdn.discordapp.com/attachments/739152437645934632/1158184017661800541/image.png?ex=651b526b&is=651a00eb&hm=64fd2b735f5810cacca24771e28499f8a18e5f80f182acc9379ff4a72b1d5069&)
+
 ### Changes in esx_multicharacter Scripts (Only if you use it)
 - If you use a custom esx_multicharacter script, you will have to ask the author of the script to find the similar event/function in their script so you can add the export
 
@@ -231,8 +328,8 @@ exports("FlaggedAccount", FlaggedAccount)
 - For QBCore, money is removed using the following function `Player.Functions.RemoveMoney`, but most of the scripts in qbcore dont rely on that false to be returned, instead they check the bank balance and then just trigger the RemoveMoney function and irrespective of the return value, they continue with the purchase. If I add a snippet for checking if player's bank account is frozen then return false, it will start giving them stuff for free. So you can use the exports provided above to do checks if account is frozen.
 - For ESX, I have added a check in getAccount function to return 0 if his account is frozen. But again, it might work at some places while it may not at some places.
 
-2. **Why are the money in bank account for job different from the money in the society account (ONLY ESX)?**
-- Banking system doesnt support society accounts. I store my account money seperately which can be accessed only through bank ui. The reason for that being, society accounts are handled through 3-4 different scripts and has a lot of dependencies in ESX. If I were to change the files, it would be a lot of headache and very difficult to maintain in the long run. You are free to turn off the bank job accounts through config for ESX. It is by default on for QBCore.
+<!-- 2. **Why are the money in bank account for job different from the money in the society account (ONLY ESX)?**
+- Banking system doesnt support society accounts. I store my account money seperately which can be accessed only through bank ui. The reason for that being, society accounts are handled through 3-4 different scripts and has a lot of dependencies in ESX. If I were to change the files, it would be a lot of headache and very difficult to maintain in the long run. You are free to turn off the bank job accounts through config for ESX. It is by default on for QBCore. -->
 
-3. **Why is my money deposited by jobs in their management menu not showing in the bank? (ONLY QBCore)**
+2. **Why is my money deposited by jobs in their management menu not showing in the bank? (ONLY QBCore)**
 - You did not follow the steps mentioned under qb-management section above. Jobs should not be able to deposit/withdraw money from the management menu, but they should be using bank instead.
