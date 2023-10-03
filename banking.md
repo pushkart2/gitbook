@@ -188,7 +188,7 @@ CreateThread(function()
 	while not GetResourceState('snipe-banking') == 'started' do
 		Wait(100)
 	end
-	Wait(2000)
+	Wait(5000)
 	local accounts = exports["snipe-banking"]:GetJobGangAccounts()
 	for k, v in pairs(accounts) do
 	local accountName = "society_"..k
