@@ -65,19 +65,19 @@ end)
 
 ## Ox Inventory
 
-- For trunk and glovebox, make the following changes in ox_inventory/server.lua, look for the following the callback `lib.callback.register('ox_inventory:openInventory', function(source, inv, data)`
+- For trunk and glovebox, make the following changes in ox_inventory/server.lua, look for the following the function `local function openInventory(source, invType, data, ignoreSecurityChecks)`
 
 look for the following code block. Do not copy this as is, please copy the lines mentioned as `add this line` and add them one by one
 ```lua
 elseif type(data) == 'table' then
 if data.netid then
-	data.type = inv
+	data.type = invType
 	right = Inventory(data)
-elseif inv == 'drop' then
+elseif invType == 'drop' then
 	right = Inventory(data.id)
-elseif inv == 'trunk' then -- add this line
+elseif invType == 'trunk' then -- add this line
 	right = Inventory(data.id) -- add this line
-elseif inv == 'glovebox' then -- add this line
+elseif invType == 'glovebox' then -- add this line
 	right = Inventory(data.id) -- add this line
 else
 	return
@@ -126,6 +126,11 @@ if not source then
 	end
 end
 ```
+
+## Changes in ox_inventory/client.lua
+
+Around line 271, look for this part of code `if inv == 'trunk' then` and replace it with 
+`if inv == 'trunk' and not exports["snipe-menu"]:isAdmin() then`
 
 # Step 5 (Bans (Only for ESX))
 
