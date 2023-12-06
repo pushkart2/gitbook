@@ -9,3 +9,4 @@
 * [Meth](meth.md)
 * [Beekeeping](beekeeping.md)
 * [Blips](blips.md)
+* [Wigs](wigs.md)
