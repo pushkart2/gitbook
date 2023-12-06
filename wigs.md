@@ -1,8 +1,9 @@
 # Steps for installation
 1. Install all the items mentioned below based on your inventory
-2. Grab the icons from asset folders and put them in your inventory images folder
-3. Go to shared/config.lua, modify the job, inventory, clothing resource name, etc as per the comments mentioned there.
-4. Go to shared/locations.lua to change/add coords for wig testing and wig crafting as well as the items required to craft the wigs.
+2. Install the SQL mentioned in SQL-Install-Me folder
+3. Grab the icons from asset folders and put them in your inventory images folder
+4. Go to shared/config.lua, modify the job, inventory, clothing resource name, etc as per the comments mentioned there.
+5. Go to shared/locations.lua to change/add coords for wig testing and wig crafting as well as the items required to craft the wigs.
 
 
 # Install the following items based on your inventory
