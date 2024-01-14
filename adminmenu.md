@@ -135,54 +135,6 @@ Around line 271, look for this part of code `if inv == 'trunk' then` and replace
 # Step 5 (Bans (Only for ESX))
 
 - Run the `bans.sql` file given in sql folder
-- Make the following changes in es_extended/server/main.lua
-```lua
-AddEventHandler('playerConnecting', function(name, setCallback, deferrals)
-	deferrals.defer()
-	local playerId = source 
-	local identifier = ESX.GetIdentifier(playerId)
-	Wait(100)
-	local isBanned, Reason = exports["snipe-menu"]:IsPlayerBanned(playerId) -- added
-	if identifier then
-		if ESX.GetPlayerFromIdentifier(identifier) then
-			deferrals.done(('There was an error loading your character!\nError code: identifier-active\n\nThis error is caused by a player on this server who has the same identifier as you have. Make sure you are not playing on the same account.\n\nYour identifier: %s'):format(identifier))
-		else
-			if isBanned then -- added
-				deferrals.done(Reason) -- added
-			else -- added
-				deferrals.done()
-			end -- added
-		end
-	else
-		deferrals.done('There was an error loading your character!\nError code: identifier-missing\n\nThe cause of this error is not known, your identifier could not be found. Please come back later or report this problem to the server administration team.')
-	end
-end)
-```
-
-If you use multicharacter script (esx-multicharacter), make the following changes in `esx-multicharacter/server/main.lua`
-```lua
-AddEventHandler('playerConnecting', function(playerName, setKickReason, deferrals)
-    deferrals.defer()
-    local playerId = source -- added
-    local identifier = GetIdentifier(source)
-
-    Wait(100)
-    local isBanned, Reason = exports["snipe-menu"]:IsPlayerBanned(playerId) -- added
-    if identifier then
-        if ESX.Players[identifier] then
-            deferrals.done(('A player is already connected to the server with this identifier.\nYour identifier: %s:%s'):format(PRIMARY_IDENTIFIER, identifier))
-        else
-            if isBanned then -- added
-                deferrals.done(Reason) -- added
-            else -- added
-                deferrals.done()
-            end -- added
-        --    deferrals.done()
-        end
-    else
-        deferrals.done(('Unable to retrieve player identifier.\nIdentifier type: %s'):format(PRIMARY_IDENTIFIER))
-    end
-end)
 ```
 
 # Step 6 (QB weathersync)
