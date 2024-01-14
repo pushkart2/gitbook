@@ -135,7 +135,6 @@ Around line 271, look for this part of code `if inv == 'trunk' then` and replace
 # Step 5 (Bans (Only for ESX))
 
 - Run the `bans.sql` file given in sql folder
-```
 
 # Step 6 (QB weathersync)
 
