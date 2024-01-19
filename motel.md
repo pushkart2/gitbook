@@ -1,3 +1,10 @@
+# Server.CFG changes
+Add the following line to server.cfg
+
+```
+setr game_enableDynamicDoorCreation "true"
+```
+
 # Exports
 
 Client Exports:
@@ -30,3 +37,6 @@ Answer: No, this script will not replace qb-apartments. This script is a standal
 ### Can I only use the MLO?
 
 Answer: No, the MLO cannot be used standalone. I might plan on releasing just the MLO in future but for now, if you use the MLO without the script, it will probably crash the server due to the amount of rooms/corridors loading.
+
+### Why do my room number changes every restart?
+Answer: The room number is assigned on player load. This is to ensure so say your server max player count is 250 but you have 1000 unique players, every player gets a room on load. Your furniture is synced and if you place it in 1 room, it will be placed at the same place in another room that is assigned to you.
