@@ -1,5 +1,6 @@
 # Table of contents
 
+* [Introduction](README.md)
 * [Motel](motel.md)
 * [Admin Menu](adminmenu.md)
 * [Banking](banking.md)
