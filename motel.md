@@ -1,3 +1,22 @@
+# Exports
+
+Client Exports:
+
+```lua
+exports["snipe-motel"]:isInRoom() -- returns room number if in room, false if not
+
+exports["snipe-motel"]:currentPlayerRoom() -- returns players current room number and false if he doesnt own a room
+
+exports["snipe-motel"]:OpenFurnitureMenu() -- Opens the furnitures menu. Only opens when the player is inside the room and he owns the room
+
+```
+
+Server Exports:
+
+```lua
+exports["snipe-motel"]:currentPlayerRoom(source) -- returns the players current room number and false if he doesnt own a room
+```
+
 # FAQ
 
 1. Does this script with my custom MLOS?
