@@ -1,5 +1,6 @@
 # Table of contents
 
+* [Motel](motel.md)
 * [Admin Menu](adminmenu.md)
 * [Banking](banking.md)
 * [IceBox](icebox.md)
