@@ -36,7 +36,7 @@ exports["snipe-motel"]:currentPlayerRoom(source) -- returns the players current 
 
 # FAQ
 
-### Does this script with my custom MLOS?
+### Will this script work with my custom MLOS?
 
 Answer: No, this script will only work with the MLO provided with the script. The reason being, the zones are hardcoded for the MLO and requires a lot of work for furniture, elevators, doorlocks, etc. This script will not work with any other MLO. There is no way to edit the zones/doorlock etc to make it work with other MLOS. 
 
