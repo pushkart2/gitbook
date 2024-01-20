@@ -1,3 +1,13 @@
+# Config
+
+- There are bunch of options in shared/open/config.lua. Make sure to go through each of them along with comments to understand what they do.
+- If you use custom framework, you will have to modify client/open/cl_framework.lua and server/open/sv_framework.lua to make it work with your framework.
+- If you use any inventory other than the ones mentioned, you will have to edit client/open/cl_stash.lua
+- If you use any other clothing script other than the ones mentioned, you will have to edit client/open/cl_outfit.lua
+
+# SQL
+- Import the sql file present in SQL Install Me folder to your database.
+
 # Server.CFG changes
 Add the following line to server.cfg
 
