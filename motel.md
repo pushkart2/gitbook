@@ -1,3 +1,14 @@
+# How the Motel System Works
+
+There are total of 285 rooms in the MLO, which means if you have a server population of 285 or lower, every player in your server will be assigned a room. 
+The room number is assigned on Player Load. So the system looks for an empty room and assigns it to the player. Once the player leaves, that room is vacant and is assigned to someone else who joins.
+
+So what about the furniture?
+- Furniture placed in your room is transferred to another room that is assigned to you. The offsets are calculated and the furniture is placed at the same place.
+
+This whole feature lets you handle 1000's of unique players without any headache. 
+The system only cares about people in server and not the other people.
+
 # Config
 
 - There are bunch of options in shared/open/config.lua. Make sure to go through each of them along with comments to understand what they do.
