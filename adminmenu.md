@@ -197,6 +197,11 @@ exports["snipe-menu"]:isAdmin()
 exports["snipe-menu"]:isAdmin(source)
 ```
 
+## Spectating
+```lua
+exports["snipe-menu"]:isInSpectating()
+```
+
 # Developer Options
 
 - You can create your own custom panels and add them to the menu. 
