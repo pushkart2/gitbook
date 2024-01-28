@@ -264,7 +264,7 @@ exports('FlaggedAccount', FlaggedAccount)
 ```
 
 ### PS Dispatch
-
+- If you use ps-dispatch v2, no changes are required
 1. Open sv_dispatchcodes.lua and add the department you want to add to the list for the alert you want them to receive
 ```lua
  ["flagged_account"] =  {displayCode = '10-13', description ="Flagged Account", radius = 0, recipientList = {'police'}, blipSprite = 110, blipColour = 1, blipScale = 1.5, blipLength = 2, sound = "Lose_1st", sound2 = "GTAO_FM_Events_Soundset", offset = "false", blipflash = "false"},
