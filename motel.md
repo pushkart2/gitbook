@@ -20,7 +20,7 @@ The system only cares about people in server and not the other people.
 - Import the sql file present in SQL Install Me folder to your database.
 
 # Nopixel Visuals (Optional)
-- People using Motel System with Nopixel Visual mods, look for the following file `ap1_04_bannerbld` and remove it. It creates a door texture on the entrance like in the image.
+- People using Motel System with Nopixel Visual mods, look for the following file `ap1_04_bannerbld` and remove it. It creates a door texture on the entrance.
 
 - Credits @mafiaborn 
 
