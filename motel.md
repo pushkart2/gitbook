@@ -42,12 +42,89 @@ exports["snipe-motel"]:currentPlayerRoom() -- returns players current room numbe
 
 exports["snipe-motel"]:OpenFurnitureMenu() -- Opens the furnitures menu. Only opens when the player is inside the room and he owns the room
 
+exports["snipe-motel"]:SpawnInsideApartment() -- Spawns the player inside the apartment. Only works if the Config.RequireMoneyToRent is set to false
 ```
 
 Server Exports:
 
 ```lua
 exports["snipe-motel"]:currentPlayerRoom(source) -- returns the players current room number and false if he doesnt own a room
+```
+
+# QB Spawn Changes (Optional)
+- If you want a player to spawn inside apartment, you will have to do the following changes.
+- NOTE: This wont spawn the new player inside the motel. Only after the first time, they will be able to spawn inside the motel
+- These are the changes only if you use qb-spawn. If you use any other spawn script, you will have to modify that script. Just see the changes I did and make similar changes to your script.
+
+## config.lua changes
+- add the following location.
+```lua
+["snipe_motel"] = { -- do not change
+    coords = vector3(-702.27, -2267.87, 13.46), 
+    location = "snipe_motel", -- do not change
+    label = "Opium Nights Motel",
+},
+```
+
+## client.lua changes
+- replace the following nui callback
+```lua
+RegisterNUICallback('spawnplayer', function(data, cb)
+    local location = tostring(data.spawnloc)
+    local type = tostring(data.typeLoc)
+    local ped = PlayerPedId()
+    local PlayerData = QBCore.Functions.GetPlayerData()
+    local insideMeta = PlayerData.metadata["inside"]
+    if type == "current" then
+        PreSpawnPlayer()
+        QBCore.Functions.GetPlayerData(function(pd)
+            ped = PlayerPedId()
+            SetEntityCoords(ped, pd.position.x, pd.position.y, pd.position.z)
+            SetEntityHeading(ped, pd.position.a)
+            FreezeEntityPosition(ped, false)
+        end)
+
+        if insideMeta.house ~= nil then
+            local houseId = insideMeta.house
+            TriggerEvent('qb-houses:client:LastLocationHouse', houseId)
+        elseif insideMeta.apartment.apartmentType ~= nil or insideMeta.apartment.apartmentId ~= nil then
+            local apartmentType = insideMeta.apartment.apartmentType
+            local apartmentId = insideMeta.apartment.apartmentId
+            TriggerEvent('qb-apartments:client:LastLocationHouse', apartmentType, apartmentId)
+        end
+        TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
+        TriggerEvent('QBCore:Client:OnPlayerLoaded')
+        PostSpawnPlayer()
+    elseif type == "house" then
+        PreSpawnPlayer()
+        TriggerEvent('qb-houses:client:enterOwnedHouse', location)
+        TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
+        TriggerEvent('QBCore:Client:OnPlayerLoaded')
+        TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
+        TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
+        PostSpawnPlayer()
+    elseif type == "normal" then
+        PreSpawnPlayer()
+        TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
+        TriggerEvent('QBCore:Client:OnPlayerLoaded')
+        TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
+        TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
+        if location == "snipe_motel" then
+            Wait(2000)
+            exports["snipe-motel"]:SpawnInsideApartment()
+            PostSpawnPlayer()
+        else
+            local pos = QB.Spawns[location].coords
+            SetEntityCoords(ped, pos.x, pos.y, pos.z)
+            Wait(500)
+            SetEntityCoords(ped, pos.x, pos.y, pos.z)
+            SetEntityHeading(ped, pos.w)
+            PostSpawnPlayer()
+        end
+    end
+    cb('ok')
+end)
+
 ```
 
 # FAQ
