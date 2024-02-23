@@ -68,6 +68,13 @@
 		close = false,
 		description = "A bag of moldy bread",
 	},
+	 ["mold_barley"] = {
+		label = "Moldy Barley",
+		weight = 100,
+		stack = true,
+		close = false,
+		description = "A bag of Moldy barley",
+	},
 ```
 
 ## Install The SQL
