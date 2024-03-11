@@ -150,7 +150,7 @@ end
 
 Replace this function.
 
-# Illenium And ESX
+# Step 7 Only for Illenium Appearance And ESX
 
 Add this following block of code in illenium-appearance/client/framework/esx/compatibility.lua
 ```lua
