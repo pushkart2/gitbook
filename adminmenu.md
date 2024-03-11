@@ -150,7 +150,41 @@ end
 
 Replace this function.
 
-# Step 7 (Optional)
+# Illenium And ESX
+
+Add this following block of code in illenium-appearance/client/framework/esx/compatibility.lua
+```lua
+RegisterNetEvent("snipe-menu:client:openAppearance", function()
+    local config = GetDefaultConfig()
+    config.ped = true
+    config.headBlend = true
+    config.faceFeatures = true
+    config.headOverlays = true
+    config.components = true
+    config.props = true
+    config.tattoos = true
+    OpenShop(config, true, "all")
+end)
+```
+
+Replace the following event in snipe-menu/server/open/sv_clothing.lua
+```lua
+RegisterServerEvent('snipe-menu:server:giveClothes', function(otherPlayerId)
+    local src = source
+    if src ~= 0 and onlineAdmins[src] then
+        SendLogs(src, "triggered", Config.Locales["give_clothes_used"]..GetPlayerName(otherPlayerId))
+        if Config.Core == "QBCore" then
+            TriggerClientEvent('qb-clothing:client:openMenu', otherPlayerId)
+        elseif Config.Core == "ESX" then
+            TriggerClientEvent("snipe-menu:client:openAppearance", otherPlayerId)
+        end
+    else
+        TriggerServerEvent("snipe-menu:server:sendLogs", "exploit", Config.Locales["clothes_exploit_event"])
+    end
+end)
+```
+
+# Step 8 (Optional)
 ## How To add new UI Locales
 - Please read each step properly. 
 - To create a new locale, for eg. in language spanish, create a new file in html/locales called for eg. sp.json
