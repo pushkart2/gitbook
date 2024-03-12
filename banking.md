@@ -35,11 +35,11 @@
 
 - Go to qb-management/client/cl_boss.lua and comment the following code.
 
-![alt text](https://cdn.discordapp.com/attachments/739152437645934632/1150546483876220928/image.png)
+https://ibb.co/r0BJs1Z
 
 - Go to qb-management/client/cl_gang.lua and comment the following code.
 
-![alt text](https://cdn.discordapp.com/attachments/739152437645934632/1150546752139694153/image.png)
+https://ibb.co/7pJNyq5
 
 - This will make sure the jobs wont be able to deposit/withdraw money from management_funds and will use my database instead.
 ## Renewed Banking
