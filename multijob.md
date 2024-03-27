@@ -68,3 +68,12 @@ RegisterNetEvent('qb-bossmenu:server:FireEmployee', function(target)
 	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
 ```
+
+# If you dont use qb-policejob and qb-ambulancejob
+- Replace the function in client/open/cl_framework.lua
+```lua
+-- if using QBCore only. For ESX, the changes are on server side in sv_framework.lua
+function ToggleDuty()
+    TriggerServerEvent("QBCore:ToggleDuty") -- this event is present in qb-core/server/main.lua
+end
+```
