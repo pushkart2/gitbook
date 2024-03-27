@@ -4,6 +4,7 @@
 * [Motel](motel.md)
 * [Admin Menu](adminmenu.md)
 * [Banking](banking.md)
+* [Multi Job](multijob.md)
 * [IceBox](icebox.md)
 * [Owned Shops](ownedshops.md)
 * [Winery](winery.md)
