@@ -184,7 +184,14 @@ RegisterServerEvent('snipe-menu:server:giveClothes', function(otherPlayerId)
 end)
 ```
 
-# Step 8 (Optional)
+# Step 8 (Admin Duty)
+- With version 3.5.0+, I have implemented a new feature called Admin Duty. This will allow you to go on duty and off duty as an admin.
+- Check config/config_new.lua for the Config Options
+- Check config/permissions.lua for the permissions
+- You need to do /adminduty if you want to use the admin menu. If you are not on duty, you will not be able to use the admin menu.
+- Webhooks for when people go on duty and off duty are also available. You can change the webhook in server/open/sv_webhooks.lua
+
+# Step 9 (Optional)
 ## How To add new UI Locales
 - Please read each step properly. 
 - To create a new locale, for eg. in language spanish, create a new file in html/locales called for eg. sp.json
@@ -208,7 +215,7 @@ end)
 - There are bunch of client/server scripts which are unencrypted which you can edit it to your liking. 
 - I wont be adding supports for other paid scripts but the logic required to edit will be made open if needed.
 
-# Step 8 (Optional Exports)
+# Step 10 (Optional Exports)
 ## Dev Mode Exports
 - You are provided with two exports, one on client and one server to check if a person is in dev mode
 - Usage (Client)
