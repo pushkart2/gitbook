@@ -1,6 +1,6 @@
 # How the Motel System Works
 
-There are total of 285 rooms in the MLO, which means if you have a server population of 285 or lower, every player in your server will be assigned a room. 
+There are total of 330 rooms in the MLO, which means if you have a server population of 285 or lower, every player in your server will be assigned a room. 
 The room number is assigned on Player Load. So the system looks for an empty room and assigns it to the player. Once the player leaves, that room is vacant and is assigned to someone else who joins.
 
 So what about the furniture?
