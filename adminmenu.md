@@ -243,6 +243,14 @@ exports["snipe-menu"]:isAdmin(source)
 exports["snipe-menu"]:isInSpectating()
 ```
 
+## Admin Role Name
+
+- Returns the role name for player
+- Usage (Server). Here source is the source/playerid for player
+```lua
+exports["snipe-menu"]:GetAdminRoleName(source)
+```
+
 # Developer Options
 
 - You can create your own custom panels and add them to the menu. 
