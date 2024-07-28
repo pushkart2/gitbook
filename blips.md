@@ -5,14 +5,52 @@
 - Configure the config properly based on the framework
 - Check all the comments in the config file
 
+
 ## Step 2 (Items)
 
+### Ox Inventory
+
+- If you use ox_inventory, just follow this, do not add any other items below
+```lua
+["tracker"] = {
+    label = "Tracker",
+    weight = 500,
+    stack = true,
+    close = true,
+    description = "Tracker that lets you show other officers",
+    client = {
+        image = "tracker.png",
+        remove = function(total)
+            pcall(function() return exports["snipe-blips"]:RemoveTrackerItem() end)
+        end
+    },
+    
+},
+
+["gangtracker"] = {
+    label = "gangtracker",
+    weight = 500,
+    stack = true,
+    close = true,
+    description = "Tracker that lets you show other Gang Members",
+    client = {
+        image = "tracker.png",
+        remove = function(total)
+            pcall(function() return exports["snipe-blips"]:RemoveTrackerItem() end)
+        end
+    },
+    
+},
+```
+
 - Add the items to your database/items.lua
-### QBCore
+### QBCore (Qb/lj inventory)
 ```lua
 ["tracker"] 			         = {["name"] = "tracker", 				        ["label"] = "Tracker", 		["weight"] = 500, 		["type"] = "item", 		["image"] = "tracker.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Tracker that lets you show other officers"},
 ["gangtracker"] 			         = {["name"] = "gangtracker", 				        ["label"] = "Gang Tracker", 		["weight"] = 500, 		["type"] = "item", 		["image"] = "tracker.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Tracker that lets you show other gang members"},
 ```
+
+
 
 ### ESX
 
@@ -43,16 +81,3 @@ end
 ```
 
 ### ESX inventory (This is already configured. So no changes required)
-
-### Ox inventory (only if you are using QBCore)
-
-Look for `TriggerEvent('esx:removeInventoryItem', item.name, item.count)` in ox_inventory/client.lua. Add the following snippet on the highlighted line.
-
-![Alt text](https://cdn.discordapp.com/attachments/739152437645934632/1143554178191466666/image.png)
-
-Add this line at the lines mentioned
-```lua
-if item.name == "tracker" or item.name == "gangtracker" then -- if you have named the item something else, change it here
-    exports["snipe-blips"]:RemoveTrackerItem()
-end
-```
