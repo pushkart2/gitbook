@@ -1,6 +1,15 @@
+# IMPORTANT
+
+- Installation for both MLOs (Opium Nights or Eclipse Tower) is exactly the same. 
+- If you bought both the MLO's, you can only use 1 at a time and make sure the mlo is not renamed. Delete the MLO you dont want to use.
+- If you switch from one MLO to another, the furnitures in your room will be at random location due to the size of the rooms and the offsets. If you want to switch, delete all the furnitures. 
+- Stashes/Outfits can stay because the player can reset them again.
+
+- Difference between the two is the room numbers (405 in Opium Nights and 276 in Eclipse Tower) and the size of the rooms.
+
 # How the Motel System Works
 
-There are total of 330 rooms in the MLO, which means if you have a server population of 285 or lower, every player in your server will be assigned a room. 
+There are total of 405 rooms in the MLO, which means if you have a server population of 285 or lower, every player in your server will be assigned a room. 
 The room number is assigned on Player Load. So the system looks for an empty room and assigns it to the player. Once the player leaves, that room is vacant and is assigned to someone else who joins.
 
 So what about the furniture?
