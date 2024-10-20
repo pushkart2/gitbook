@@ -49,6 +49,13 @@ https://ibb.co/7pJNyq5
 - This will also move all the job money from bank_accounts_new into my database.
 - Restart the server again.
 
+## QB Banking
+- Restart the server. Make sure nobody connects the server.
+- Run the command `convertqbbanking` in your server console once the server is up.
+- This will move everyone's personal account money into their bank account and delete the personal account information.
+- This will also move all the job money from your tables into my tables.
+- Restart the server again.
+
 ## QBCore 
 
 ### Changes in qb-core
