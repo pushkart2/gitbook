@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [DonatorSystem](donatorsystem.md)
 * [Motel](motel.md)
 * [Admin Menu](adminmenu.md)
 * [Banking](banking.md)
