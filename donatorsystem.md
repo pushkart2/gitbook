@@ -1,7 +1,7 @@
 # Setup Tebex Store
 
 - Command to add for package 
-- Check video for more info
+- Check video for more info - https://www.youtube.com/watch?v=t7toRSVcGAk&feature=youtu.be
 ```lua
 package_bought {"transaction_id":"{transaction}", "package":"{packageName}", "buyer_name":"{purchaserName}", "buyer_email":"{email}"}
 ```
