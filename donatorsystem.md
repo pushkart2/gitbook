@@ -374,3 +374,12 @@ exports('RegisterInventory', RegisterInventory)
   'Pacific/Apia',
   'Africa/Johannesburg'
   ```
+
+# Developer Options
+## Commands
+- `/addgems playerid amount` - Add gems to a player
+- `/removegems playerid amount` - Remove gems from a player
+
+## Exports
+- `exports["snipe-donatorsystem"]:AddCoins(playerid, amount)` - Add coins to a player
+- `exports["snipe-donatorsystem"]:RemoveCoins(playerid, amount)` - Remove coins from a player
