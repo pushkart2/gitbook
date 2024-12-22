@@ -15,9 +15,18 @@ package_bought {"transaction_id":"{transaction}", "package":"{packageName}", "bu
 - Add the following snippet in qb-inventory/server/functions.lua (end of the file)
 ```lua
 function RegisterInventory(identifier, data)
-    -- if Inventories[identifier] then return end
+    local items = {}
+    if Inventories[identifier] then 
+        items = Inventories[identifier].items
+    end
     if not identifier then return end
-    Inventories[identifier] = InitializeInventory(identifier, data)
+    Inventories[identifier] = {
+        items = items,
+        isOpen = false,
+        label = data and data.label or identifier,
+        maxweight = data and data.maxweight or Config.StashSize.maxweight,
+        slots = data and data.slots or Config.StashSize.slots
+    }
 end
 
 exports('RegisterInventory', RegisterInventory)
