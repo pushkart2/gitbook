@@ -392,3 +392,4 @@ exports('RegisterInventory', RegisterInventory)
 ## Exports
 - `exports["snipe-donatorsystem"]:AddCoins(playerid, amount)` - Add coins to a player
 - `exports["snipe-donatorsystem"]:RemoveCoins(playerid, amount)` - Remove coins from a player
+- `exports["snipe-donatorsystem"]:GetCoins(playerid)` - Return coins of a player
