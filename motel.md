@@ -52,6 +52,8 @@ exports["snipe-motel"]:currentPlayerRoom() -- returns players current room numbe
 exports["snipe-motel"]:OpenFurnitureMenu() -- Opens the furnitures menu. Only opens when the player is inside the room and he owns the room
 
 exports["snipe-motel"]:SpawnInsideApartment() -- Spawns the player inside the apartment. Only works if the Config.RequireMoneyToRent is set to false
+
+exports["snipe-motel"]:getPlayerRoomLabel() -- returns players room label (used for LilSeoul Motel MLO)
 ```
 
 Server Exports:
