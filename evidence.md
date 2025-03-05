@@ -44,6 +44,7 @@
 		},
 		description = "Pouch to hold all your evidences",
 		consume = 0,
+		allowArmed = true,
 	},
 
 	["dna_swab_kit"] = {
