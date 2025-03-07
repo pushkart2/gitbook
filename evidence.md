@@ -3,6 +3,10 @@
 - screenshot-basic
 - fivemanage or fivemerr api key to store images
 
+# Commands
+- /evidence to open evidence menu near the designated locations
+- /clearnearbyscene to clear all the evidence in the nearby area
+
 # Install Items To Ox Inventory and copy Images
 - Install the following items
 - All the images are present in snipe-evidence/images folder
@@ -94,3 +98,11 @@
 
 ## Why cant I see images in the evidence ui by clicking on camera icon?
 - You have not setup the api correctly in the server/open/sv_image_api.lua
+
+# Developer Exports
+
+## Client Side
+```lua
+exports['snipe-evidence']:isInrecreateMenu() -- returns true/fale if you are in recreate mode
+exports['snipe-evidence']:OpenEvidenceUI() -- to open evidence ui using exports
+```
