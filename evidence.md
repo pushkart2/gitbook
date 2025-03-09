@@ -105,4 +105,5 @@
 ```lua
 exports['snipe-evidence']:isInrecreateMenu() -- returns true/fale if you are in recreate mode
 exports['snipe-evidence']:OpenEvidenceUI() -- to open evidence ui using exports
+exports["snipe-evidence"]:CreateFingerPrint(coords) -- to create fingerprint at the coords (coords is a vector3, if not passed, it will use player's current coords)
 ```
