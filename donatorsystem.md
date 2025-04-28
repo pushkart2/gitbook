@@ -5,6 +5,7 @@
 ```lua
 package_bought {"transaction_id":"{transaction}", "package":"{packageName}", "buyer_name":"{purchaserName}", "buyer_email":"{email}"}
 ```
+- Add the packages your added for commands for in shared/packages.lua by following the comments properly!
 
 # Config Changes
 - Please go through the shared folder properly and read through the comments properly.
