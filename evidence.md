@@ -3,6 +3,10 @@
 - screenshot-basic
 - fivemanage or fivemerr api key to store images
 
+# Commands
+- /evidence to open evidence menu near the designated locations
+- /clearnearbyscene to clear all the evidence in the nearby area
+
 # Install Items To Ox Inventory and copy Images
 - Install the following items
 - All the images are present in snipe-evidence/images folder
@@ -76,6 +80,22 @@
 		},
 		consume = 0,
 	},
+
+	["bleach"] = {
+		label = "Bleach",
+		weight = 200,
+		stack = false,
+		close = false,
+		description = "Clean up all the blood stains with this",
+	},
+
+	["evidence_tweezers"] = {
+		label = "Tweezers",
+		weight = 200,
+		stack = false,
+		close = false,
+		description = "You can pick up small items with this",
+	},
 ```
 
 # Configuration.
@@ -94,3 +114,18 @@
 
 ## Why cant I see images in the evidence ui by clicking on camera icon?
 - You have not setup the api correctly in the server/open/sv_image_api.lua
+
+## Why are the images for evidences not showing in inventory?
+- You have a discord webhook set in your inventory.cfg/oxinventory.cfg file. Set it to blank and it will work.
+
+- `set inventory:webhook ""`
+
+# Developer Exports
+
+## Client Side
+```lua
+exports['snipe-evidence']:isInrecreateMenu() -- returns true/fale if you are in recreate mode
+exports['snipe-evidence']:OpenEvidenceUI() -- to open evidence ui using exports
+exports["snipe-evidence"]:CreateFingerPrint(coords) -- to create fingerprint at the coords (coords is a vector3, if not passed, it will use player's current coords)
+exports["snipe-evidence"]:IsWearingGloves() -- returns true/false if player is wearing gloves
+```
