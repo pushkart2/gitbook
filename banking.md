@@ -1,8 +1,8 @@
-## SQL
+## Basic Installation
 
-- Install the sql in `INSTALL ME` folder
 - Put the `snipe-banking` resource in your resources folder and ensure it in server.cfg at the end
 - If you use any of the following management system mentioned below, check the steps your need to take.
+
 ## Config Changes
 
 - If you have renamed your qb-core folder, es_extended folder or any other events, make sure to change them at respective places. If you use the base qb-core or es_extended, you dont need to change anything in `Config.FrameworkTriggers`
