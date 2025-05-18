@@ -1,3 +1,7 @@
+# IMPORTANT
+
+- Make sure the script starts after snipe-motel
+
 # Framework
 
 - This script only works with QBCore/ESX and support 3 inventories. Ox Inventory, QB Inventory and QS Inventory
