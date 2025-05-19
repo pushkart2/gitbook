@@ -324,6 +324,9 @@ exports("FlaggedAccount", FlaggedAccount)
 | DeleteCharacter(citizenid) | Should be triggered from place where the character is deleted. Parameter required is `citizenid` |
 | CreatePersonalTransactions(identifier, amount, memo, type, otherPlayerIdentifier, isJob) | Should be triggered from place where the transaction is made. Parameters required are `identifier` (citizenid for qbcore and charid for esx), `amount`, `memo`, `type` (deposit/withdraw/transfer), `otherPlayerIdentifier` (citizenid for qbcore and charid for esx, if type is transfer), isJob to true if you are sending to job and otherPlayerIdentifier will be the job/gang name, isJob to true if you are sending to job and otherPlayerIdentifier will be the job/gang name |
 | CreateJobTransactions(jobgang, amount, memo, type, identifier, otherPlayerIdentifier, isJob) | Should be triggered from place where the transaction is made. Parameters required are `jobgang` (job name or gang name), `amount`, `memo`, `type` (deposit/withdraw/transfer), `identifier` (citizenid for qbcore and charid for esx), `otherPlayerIdentifier` (citizenid for qbcore and charid for esx, if type is transfer), isJob to true if you are sending to job and otherPlayerIdentifier will be the job/gang name |
+CreateJobGangAccount(name, label, amount, isJob) | name is the account name which will be used to add/remove get job money (use only snipe-banking exports for these operations). label is what you will see in transactions. amount is starting balance for the account. isJob is true if the account is a job account, false if it is a gang account |
+|
+
 
 | Client Exports | Description |
 | :--- | --- |
