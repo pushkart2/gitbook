@@ -96,6 +96,19 @@
 		close = false,
 		description = "You can pick up small items with this",
 	},
+
+	["bactester"] = {
+		label = "Bac Tester",
+		weight = 200,
+		stack = true,
+		close = true,
+		description = "Tool to get check BAC levels",
+		client = {
+			image = "bactester.png",
+            export = "snipe-evidence.UseBacItem"
+		},
+		consume = 0,
+	},
 ```
 
 # Configuration.
@@ -128,4 +141,33 @@ exports['snipe-evidence']:isInrecreateMenu() -- returns true/fale if you are in 
 exports['snipe-evidence']:OpenEvidenceUI() -- to open evidence ui using exports
 exports["snipe-evidence"]:CreateFingerPrint(coords) -- to create fingerprint at the coords (coords is a vector3, if not passed, it will use player's current coords)
 exports["snipe-evidence"]:IsWearingGloves() -- returns true/false if player is wearing gloves
+
+exports["snipe-evidence"]:AddBacLevel(level) -- how much bac level you want to add (requires Config.BAC enabled)
+exports["snipe-evidence"]:RemoveBacLevel(level) -- how much bac level you want to remove (requires Config.BAC enabled)
+
+-- this is for the 3d text in camera (look at the usage)
+exports["snipe-evidence"]:Camera3DTextExport() -- starts a thread in evidence system which shows the 3d text for evidences (should be triggered only once when you enable camera)
+exports["snipe-evidence"]:Toggle3DText() -- toggles the 3d text to show the 3d texts
+exports["snipe-evidence"]:StopCamera3DTextThread() -- stops the thread started in Camera3DTextExport()
+```
+
+## Usage for the camera exports 
+- this is just for test purposes and needs to be implemented by customer itself to make it work! No support provided to integrate in your personal scripts!!
+
+```lua
+CreateThread(function()
+    local testEnable = true
+    exports["snipe-evidence"]:Camera3DTextExport()
+    while testEnable do
+        Wait(0)
+        if IsControlJustPressed(0, 38) then -- press E to toggle 3D text
+            Toggle3DText()
+        end
+
+        if IsControlJustPressed(0, 177) then -- press ESC to stop the camera
+            StopCamera3DTextThread()
+            testEnable = false
+        end
+    end
+end)
 ```
