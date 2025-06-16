@@ -109,6 +109,19 @@
 		},
 		consume = 0,
 	},
+
+	["gsrkit"] = {
+		label = "GSR Kit",
+		weight = 200,
+		stack = true,
+		close = true,
+		description = "Tool to get check GSR",
+		client = {
+			image = "gsrkit.png",
+            export = "snipe-evidence.CheckGSR"
+		},
+		consume = 0,
+	},
 ```
 
 # Configuration.
