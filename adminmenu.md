@@ -98,23 +98,6 @@ RegisterNetEvent("snipe-menu:client:openAppearance", function()
 end)
 ```
 
-Replace the following event in snipe-menu/server/open/sv_clothing.lua
-```lua
-RegisterServerEvent('snipe-menu:server:giveClothes', function(otherPlayerId)
-    local src = source
-    if src ~= 0 and onlineAdmins[src] then
-        SendLogs(src, "triggered", Config.Locales["give_clothes_used"]..GetPlayerName(otherPlayerId))
-        if Config.Core == "QBCore" then
-            TriggerClientEvent('qb-clothing:client:openMenu', otherPlayerId)
-        elseif Config.Core == "ESX" then
-            TriggerClientEvent("snipe-menu:client:openAppearance", otherPlayerId)
-        end
-    else
-        TriggerServerEvent("snipe-menu:server:sendLogs", "exploit", Config.Locales["clothes_exploit_event"])
-    end
-end)
-```
-
 # Step 8 (Admin Duty)
 - With version 3.5.0+, I have implemented a new feature called Admin Duty. This will allow you to go on duty and off duty as an admin.
 - Check config/config_new.lua for the Config Options
