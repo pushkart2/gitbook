@@ -164,6 +164,13 @@ exports["snipe-evidence"]:Toggle3DText() -- toggles the 3d text to show the 3d t
 exports["snipe-evidence"]:StopCamera3DTextThread() -- stops the thread started in Camera3DTextExport()
 ```
 
+## Server Side
+```lua
+exports["snipe-evidence"]:GetPlayerFingerprintInformation(source) -- returns name and fingerprint (check usage in server/open/sv_exports.lua)
+exports["snipe-evidence"]:GetPlayerInformationFromFingerprint(fingerprint) -- returns name (check usage in server/open/sv_exports.lua)
+exports["snipe-evidence"]:RemoveAllEvidences() -- removes all evidence present in the world
+```
+
 ## Usage for the camera exports 
 - this is just for test purposes and needs to be implemented by customer itself to make it work! No support provided to integrate in your personal scripts!!
 
