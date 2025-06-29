@@ -1,20 +1,6 @@
 # Step 1 (Config)
 
-## ESX
-- Configure the config
-
-```lua
-Config.Core = "ESX" -- ESX or QBCore
-Config.CoreFolderName = "es_extended"  -- es_extended || qb-core
-
-Config.PlayerLoadedEvent = "esx:playerLoaded" -- esx:playerLoaded || QBCore:Client:OnPlayerLoaded
-Config.PlayerUnloadEvent = "esx:onPlayerLogout " -- esx:onPlayerLogout || QBCore:Client:OnPlayerUnload           
-
-Config.Target = "qtarget" -- qb-target || ox_target || qtarget (Only these 3 targets are supported. You will have to edit in cl_customise if you want to use any other target other than this. No support is given to other target scripts)
-```
-
-## QBCore
-- Config is by default set to QBCore. 
+-- Read the comments in config and only edit the necessary things
 
 # Step 2 (Compatibility)
 
