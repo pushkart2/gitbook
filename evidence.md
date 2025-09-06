@@ -155,6 +155,9 @@ exports['snipe-evidence']:OpenEvidenceUI() -- to open evidence ui using exports
 exports["snipe-evidence"]:CreateFingerPrint(coords) -- to create fingerprint at the coords (coords is a vector3, if not passed, it will use player's current coords)
 exports["snipe-evidence"]:IsWearingGloves() -- returns true/false if player is wearing gloves
 
+exports["snipe-evidence"]:GenerateBloopDrop(coords) -- to generate bloop drop at coords from a person (will attach players dna to this evidence)
+exports["snipe-evidence"]:CreateVehicleFingerprint(vehicle) -- creates fingerprint evidence for the vehicle (if vehicle is not passed it will not do anything)
+
 exports["snipe-evidence"]:AddBacLevel(level) -- how much bac level you want to add (requires Config.BAC enabled)
 exports["snipe-evidence"]:RemoveBacLevel(level) -- how much bac level you want to remove (requires Config.BAC enabled)
 
@@ -190,4 +193,16 @@ CreateThread(function()
         end
     end
 end)
+```
+
+## Events
+
+# When player enters recreate menu
+```lua
+AddEventHandler('snipe-evidence:client:enteredRecreate', function() end)
+```
+
+# When player leaves recreate menu
+```lua
+AddEventHandler('snipe-evidence:client:leftRecreate', function() end)
 ```
