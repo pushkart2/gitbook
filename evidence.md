@@ -160,7 +160,8 @@
 - You have a discord webhook set in your inventory.cfg/oxinventory.cfg file. Set it to blank and it will work.
 
 ## Why my gun auto holsters when I shoot?
-- If a weapon is spawned directly in hand without using the item from inventory (probably deathmatch, arena, paintball scripts), it will auto holster. You can add exports for when player is in such areas so it doesnt auto holster
+- If a weapon is spawned directly in hand without using the item from inventory (probably deathmatch, arena, paintball scripts), it will auto holster. You can add exports for when player is in such areas so it doesnt auto holster.
+- Look for function IgnoreEvidence in snipe-evidence/client/open/cl_customise.lua and add the exports there
 
 - `set inventory:webhook ""`
 
