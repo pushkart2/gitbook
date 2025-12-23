@@ -122,6 +122,21 @@
 		},
 		consume = 0,
 	},
+
+	["fingerprint_scanner"] = {
+		label = "Fingerprint Scanner",
+		weight = 200,
+		stack = true,
+		close = true,
+		description = "A kit to take register fingerprints",
+		client = {
+			image = "fingerprint_scanner.png",
+		},
+		server = {
+			export = "snipe-evidence.TakeFingerPrint"
+		},
+		consume = 0,
+	},
 ```
 
 # Configuration.
