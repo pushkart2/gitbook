@@ -159,6 +159,9 @@
 ## Why are the images for evidences not showing in inventory?
 - You have a discord webhook set in your inventory.cfg/oxinventory.cfg file. Set it to blank and it will work.
 
+## Why my gun auto holsters when I shoot?
+- If a weapon is spawned directly in hand without using the item from inventory (probably deathmatch, arena, paintball scripts), it will auto holster. You can add exports for when player is in such areas so it doesnt auto holster
+
 - `set inventory:webhook ""`
 
 # Developer Exports
