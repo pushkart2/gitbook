@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Crafting](crafting.md)
 * [DonatorSystem](donatorsystem.md)
 * [Evidence System](evidence.md)
 * [Motel](motel.md)
