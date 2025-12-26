@@ -5,6 +5,21 @@
 # Commands
 - /crafting:admin to open admin crafting options
 
+# Installation
+- Go through the shared folder properly. There are comments on every line explaining what each thing does.
+- Setup your webhooks in server/open/sv_webhooks.lua
+- Make sure the script starts at the very end in your server.cfg so all the dependencies start before the crafting script.
+- Database tables are installed automatically so no need to run any sql file.
+- All the ui locales are present in html/locales
+- Install the following item. (No image required. Images are configured for blueprints through shared/recipes.lua)
+```lua
+["crafting_blueprints"] = {
+    label = "Blueprints",
+    weight = 10,
+    stack = false,
+},
+```
+
 # Install Items To Ox Inventory and copy Images (Only required if you use snipe-motel)
 - Install the following items
 - All the images are present in snipe-crafting/images folder
