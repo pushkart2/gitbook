@@ -38,6 +38,10 @@
 		weight = 10000,
 		stack = true,
 		close = true,
+        consume = 0,
+        server = {
+            export = "snipe-moonshine.useBarrel"
+        },
 		description = "A barrel of moonshine",
 	},
 
