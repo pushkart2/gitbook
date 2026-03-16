@@ -403,6 +403,8 @@ exports('RegisterInventory', RegisterInventory)
 ```sql
 SELECT 
     c.transaction_id,
+    r.name,
+    r.identifier,
     c.total_codes_coins,
     r.total_redeemed_coins
 FROM
@@ -417,7 +419,7 @@ FROM
 LEFT JOIN
 (
     SELECT 
-        transaction_id,
+        transaction_id, name, identifier,
         SUM(coins) AS total_redeemed_coins
     FROM snipe_donator_redeemed
     GROUP BY transaction_id
