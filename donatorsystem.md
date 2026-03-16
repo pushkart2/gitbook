@@ -394,3 +394,36 @@ exports('RegisterInventory', RegisterInventory)
 - `exports["snipe-donatorsystem"]:AddCoins(playerid, amount)` - Add coins to a player
 - `exports["snipe-donatorsystem"]:RemoveCoins(playerid, amount)` - Remove coins from a player
 - `exports["snipe-donatorsystem"]:GetCoins(playerid)` - Return coins of a player
+
+## Donator System Helpful Queries
+
+- With the latest update I have added where when a player redeems the coins, the entry is stored in another table on when he claimed it.
+- This new table can help track exploiters who use network lag switches to claim same transaction id multiple times.
+- Use the query mentioned below and run it every now and then to track down people that claimed more gems than they were supposed to. 
+```sql
+SELECT 
+    c.transaction_id,
+    c.total_codes_coins,
+    r.total_redeemed_coins
+FROM
+(
+    SELECT 
+        transaction_id,
+        SUM(coins) AS total_codes_coins
+    FROM snipe_donator_codes
+    WHERE redeemed = '1'
+    GROUP BY transaction_id
+) c
+LEFT JOIN
+(
+    SELECT 
+        transaction_id,
+        SUM(coins) AS total_redeemed_coins
+    FROM snipe_donator_redeemed
+    GROUP BY transaction_id
+) r
+ON c.transaction_id = r.transaction_id
+WHERE 
+    r.total_redeemed_coins IS NOT NULL
+    AND IFNULL(c.total_codes_coins,0) != IFNULL(r.total_redeemed_coins,0);
+```
