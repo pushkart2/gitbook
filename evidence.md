@@ -209,17 +209,6 @@ exports["snipe-evidence"]:Toggle3DText() -- toggles the 3d text to show the 3d t
 exports["snipe-evidence"]:StopCamera3DTextThread() -- stops the thread started in Camera3DTextExport()
 
 
--- to create custom evidences
-
-exports["snipe-evidence"]:GetPlayerInfo() -- returns players dna and fingerprint..
-exports["snipe-evidence"]:CreateCustomEvidence(type, data) -- where type is the type you created in Config (if its wrong, it will send print in chat) and data is the data for evidence 
--- Usage
-
-local data = exports["snipe-evidence"]:GetPlayerInfo() 
--- return {dna = dnaid, fingerprint = fingeprintid}
-
--- if you miss any of the data that is setup in config and not sent with the data, it will not create the evidence. You can check f8 prints to get more details. 
-exports["snipe-evidence"]:CreateCustomEvidence("shoeprint" {shoetype = "Test Shoe Type", shoesize = "Test Shoe Size"})
 
 ```
 
@@ -265,3 +254,23 @@ AddEventHandler('snipe-evidence:client:enteredRecreate', function() end)
 ```lua
 AddEventHandler('snipe-evidence:client:leftRecreate', function() end)
 ```
+
+## Custom Evidences
+
+- Make sure to add your custom evidence to share/config.lua
+- Read the existing custom evidence type I have created. All the fields should be populated. If any missing, it will not set up the evidence.
+
+```lua
+-- to create custom evidences
+
+exports["snipe-evidence"]:GetPlayerInfo() -- returns players dna and fingerprint..
+exports["snipe-evidence"]:CreateCustomEvidence(type, data) -- where type is the type you created in Config (if its wrong, it will send print in chat) and data is the data for evidence 
+-- Usage
+
+local data = exports["snipe-evidence"]:GetPlayerInfo() 
+-- return {dna = dnaid, fingerprint = fingeprintid}
+
+-- if you miss any of the data that is setup in config and not sent with the data, it will not create the evidence. You can check f8 prints to get more details. 
+exports["snipe-evidence"]:CreateCustomEvidence("shoeprint" {shoetype = "Test Shoe Type", shoesize = "Test Shoe Size"})
+```
+
