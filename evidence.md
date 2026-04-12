@@ -149,7 +149,7 @@
 	["evidence_objects"] = {
 		label = "Evidence Objects",
 		weight = 200,
-		stack = false,
+		stack = true,
 		close = false,
 		consume = 0,
 		server = {
