@@ -137,6 +137,26 @@
 		},
 		consume = 0,
 	},
+
+	["dnasample"] = {
+		label = "DNA Sample",
+		weight = 200,
+		stack = false,
+		close = false,
+		description = "DNA sample gathered using the swab kit",
+	},
+
+	["evidence_objects"] = {
+		label = "Evidence Objects",
+		weight = 200,
+		stack = false,
+		close = false,
+		consume = 0,
+		server = {
+			export = "snipe-evidence.useObjects"
+		},
+		description = "Objects that can be placed around crime scenes",
+	}
 ```
 
 # Configuration.
@@ -187,7 +207,24 @@ exports["snipe-evidence"]:RemoveBacLevel(level) -- how much bac level you want t
 exports["snipe-evidence"]:Camera3DTextExport() -- starts a thread in evidence system which shows the 3d text for evidences (should be triggered only once when you enable camera)
 exports["snipe-evidence"]:Toggle3DText() -- toggles the 3d text to show the 3d texts
 exports["snipe-evidence"]:StopCamera3DTextThread() -- stops the thread started in Camera3DTextExport()
+
+
+-- to create custom evidences
+
+exports["snipe-evidence"]:GetPlayerInfo() -- returns players dna and fingerprint..
+exports["snipe-evidence"]:CreateCustomEvidence(type, data) -- where type is the type you created in Config (if its wrong, it will send print in chat) and data is the data for evidence 
+-- Usage
+
+local data = exports["snipe-evidence"]:GetPlayerInfo() 
+-- return {dna = dnaid, fingerprint = fingeprintid}
+
+-- if you miss any of the data that is setup in config and not sent with the data, it will not create the evidence. You can check f8 prints to get more details. 
+exports["snipe-evidence"]:CreateCustomEvidence("shoeprint" {shoetype = "Test Shoe Type", shoesize = "Test Shoe Size"})
+
 ```
+
+
+
 
 ## Server Side
 ```lua
