@@ -31,6 +31,9 @@
 		}
 	},
 ```
+# Working
+- The createPrice in config is for how much the business has to pay to make a custom food item. Set it to nil or 0 if you dont want to charge anything.
+- The crafting requires items in the business stash for that business. The ingredients are not taken from players inventory.
 
 # Config
 
