@@ -90,3 +90,6 @@ Available options where you can change the value according to your needs
 
 # Webhooks
 - All the webhooks can be added in server/open/sv_webhooks.lua
+
+# Commands
+- If you want to find offset on the vehicles to add, use command `/foodtruckoffset` and get the offsets. It will copy the offsets to clipboard when you press G
