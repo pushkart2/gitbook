@@ -9,8 +9,6 @@
 		consume = 0,
 		degrade = 2880,
 		decay = true,
-		-- degrade = 3 * 24 * 60,
-		-- description = "Default restaurant item",
 		server = {
 			export = "snipe-customrestaurants.useRestaurantItem"
 		}
@@ -24,10 +22,21 @@
 		consume = 0,
 		degrade = 2880,
 		decay = true,
-		-- degrade = 3 * 24 * 60,
-		-- description = "Default restaurant item",
 		server = {
 			export = "snipe-customrestaurants.useBundle"
+		}
+	},
+
+	["default_menu_card"] = {
+		label = "Default Menu Card",
+		weight = 150,
+		stack = true,
+		close = true,
+		consume = 0,
+		degrade = 10, -- 10 minutes (so people dont stack it for no reason) It will delete from pocket in 10 minutes
+		decay = true,
+		server = {
+			export = "snipe-customrestaurants.useMenuCard"
 		}
 	},
 ```
