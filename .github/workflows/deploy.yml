@@ -2,7 +2,7 @@ name: Deploy MkDocs site
 
 on:
   push:
-    branches: [main]
+    branches: [main, mkdocs-setup]
   workflow_dispatch:
 
 permissions:
