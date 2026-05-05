@@ -15,7 +15,7 @@ Cook, bag, and distribute methamphetamine — table-based crafting with a slider
 
 ## :material-package-variant-closed: Requirements
 
-- [SliderGame](https://github.com/pushkart2/slidergame)
+- [SliderGame](https://github.com/pushkart2/slidergame) 
 - A target system: **qb-target**, **qtarget**, or **ox_target**
 
 ## :material-package-variant: Items
