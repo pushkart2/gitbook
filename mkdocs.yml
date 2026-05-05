@@ -26,28 +26,19 @@ theme:
     - content.tabs.link
     - toc.follow
   palette:
-    # Dark by default
-    - media: "(prefers-color-scheme)"
-      scheme: slate
+    # Dark default (no media query = always wins on first load)
+    - scheme: slate
       primary: custom
       accent: custom
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    - scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: custom
-      accent: custom
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
 
 extra_css:
   - stylesheets/extra.css
