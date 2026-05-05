@@ -1,4 +1,4 @@
-site_name: Snipe Scripts
+site_name: SnipeScripts
 site_url: https://pushkart2.github.io/gitbook/
 repo_url: https://github.com/pushkart2/gitbook
 repo_name: pushkart2/gitbook
@@ -6,44 +6,75 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  font:
+    text: Inter
+    code: JetBrains Mono
   features:
     - navigation.instant
+    - navigation.instant.prefetch
     - navigation.tracking
     - navigation.top
+    - navigation.path
     - navigation.indexes
+    - navigation.footer
     - search.suggest
-    - search.highlight
+    - search.share
     - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
     - toc.follow
   palette:
+    # Dark by default
+    - media: "(prefers-color-scheme)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: black
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: black
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
+
+extra_css:
+  - stylesheets/extra.css
 
 markdown_extensions:
   - admonition
   - attr_list
   - md_in_html
   - tables
+  - pymdownx.caret
+  - pymdownx.tilde
+  - pymdownx.keys
   - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - toc:
       permalink: true
 
@@ -53,6 +84,9 @@ extra:
       link: https://discord.gg/AeCVP2F8h7
     - icon: fontawesome/brands/github
       link: https://github.com/pushkart2
+    - icon: fontawesome/solid/cart-shopping
+      link: https://snipe.tebex.io
+      name: Tebex Store
 
 nav:
   - Home: index.md

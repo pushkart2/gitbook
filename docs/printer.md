@@ -1,147 +1,157 @@
-# QB-PRINTER
-A QBCore based FiveM script for making printers workable.
+---
+icon: material/printer
+---
+
+# Printer
+
+Print real documents using an in-game printer/photocopy prop. Add a printer at any location by adding coords to `config.lua`.
 
 ---
-## Description
-- Take printout of real documents using in-game prop of Photocopy/Printer machine. Add printer to any location by just adding the coords of location in **config.lua** file
+
+## :material-cog: Configuration
+
 ```lua
 Config.Printer = {
-    [1] = {coords = vector3(-42.3, -1749.29, 29.42), heading = 320.32, SpawnModel = true, count = 50, capacity = 100},
-    
-    -- Add new coord and heading 
-    -- SpawnModel (spawn machine prop or not at given coords)
-    -- capacity (Maximum number of A4 sheets machine can carry)
-    -- count (Initial count of A4 sheets in printer, when resource start)
+    [1] = { coords = vector3(-42.3, -1749.29, 29.42), heading = 320.32, SpawnModel = true, count = 50, capacity = 100 },
+
+    -- coords      vector3 location
+    -- heading     facing direction
+    -- SpawnModel  whether to spawn the printer prop at the coords
+    -- capacity    max A4 sheets the printer can hold
+    -- count       initial A4-sheet count when the resource starts
 }
 ```
-## Dependencies
-- ESX/QBCore
-- ox_lib
-- linden_inventory or ox-inventory or quasar inventory or qb inventory
-- [interact-sound](https://github.com/qbcore-framework/interact-sound) (Optional if you want printing sounds. Check ogg file in assets and put that in interact-sound)
 
-## Installation
-- Drag and Drop assets file (given in assets folder) in mentioned folders
+## :material-package-variant-closed: Dependencies
 
-| File | Folder Path |
-|------|-------------|
-|printer.ogg|_interact-sound/client/html/sounds_|
-|a4sheets.png|_linden_inventory/html/images_|
-|printerdocument.png|_linden_inventory/html/images_|
+- ESX or QBCore
+- `ox_lib`
+- One of: `linden_inventory`, `ox_inventory`, `quasar inventory`, or `qb-inventory`
+- *Optional:* [interact-sound](https://github.com/qbcore-framework/interact-sound) — for printing sounds. The `.ogg` file is in `assets/`.
 
-# For Linden Inventory
+## :material-package-down: Installation
 
-- Add items in **linden_inventory/shared/items.lua**, code snippet is given below
-```lua
-['a4sheets'] = {
-    label = 'A4 Sheets',
-    weight = 500,
-    stack = true,
-    close = false,
-},
+Drop assets from `assets/` into the right folders:
 
-['printerdocument'] = {
-    label = 'Printed Document',
-    weight = 1000,
-    stack = false,
-    close = true,
-    client = {}
-},
-```
-- Update **linden_inventory/client/main.lua** file as mentioned in code snippet
-- look for event - 'linden_inventory:useItem' and add an extra "and" like mentioned in the snippet
+| File | Destination |
+|---|---|
+| `printer.ogg` | `interact-sound/client/html/sounds/` |
+| `a4sheets.png` | `linden_inventory/html/images/` |
+| `printerdocument.png` | `linden_inventory/html/images/` |
 
-```lua
-RegisterNetEvent('linden_inventory:useItem')
-AddEventHandler('linden_inventory:useItem', function(item)
-	if item ~= "printerdocument" and item.metadata.bag and not currentInventory then
-		invOpen = false
-		TriggerServerEvent('linden_inventory:openInventory', 'bag', { id = item.metadata.bag, label = item.label..' ('..item.metadata.bag..')', slot = item.slot, slots = item.metadata.slot or 5})
-		return
-	end
-end)
-```
+## :material-package-variant: Items
 
-- Set `Config.Inventory = "linden"` in config
+=== "Linden Inventory"
 
-# For OX Inventory
+    Add to `linden_inventory/shared/items.lua`:
 
-1. Set `Config.Inventory = "ox"` in config
+    ```lua
+    ['a4sheets'] = {
+        label  = 'A4 Sheets',
+        weight = 500,
+        stack  = true,
+        close  = false,
+    },
 
-2. Add the item in items.lua like this 
+    ['printerdocument'] = {
+        label  = 'Printed Document',
+        weight = 1000,
+        stack  = false,
+        close  = true,
+        client = {}
+    },
+    ```
 
-```lua
-['a4sheets'] = {
-		label = 'A4 Sheets',
-		weight = 500,
-		stack = true,
-		close = false,
-	},
+    Then in `linden_inventory/client/main.lua`, find `linden_inventory:useItem` and add `and` to the existing condition:
 
-	['printerdocument'] = {
-		label = 'Printed Document',
-		weight = 1000,
-		stack = false,
-		close = true,
-		description = nil,
-		client = {
-			export = "snipe-printer.useDocument"
-		},
-	},
-```
+    ```lua
+    RegisterNetEvent('linden_inventory:useItem')
+    AddEventHandler('linden_inventory:useItem', function(item)
+        if item ~= "printerdocument" and item.metadata.bag and not currentInventory then
+            invOpen = false
+            TriggerServerEvent('linden_inventory:openInventory', 'bag', { id = item.metadata.bag, label = item.label..' ('..item.metadata.bag..')', slot = item.slot, slots = item.metadata.slot or 5 })
+            return
+        end
+    end)
+    ```
 
-# For Quasar inventory
+    Set `Config.Inventory = "linden"` in config.
 
-- Add the two items in your qs-core/config/config_items.lua 
+=== "Ox Inventory"
 
-```lua
+    Set `Config.Inventory = "ox"` in config and add to `items.lua`:
+
+    ```lua
+    ['a4sheets'] = {
+        label  = 'A4 Sheets',
+        weight = 500,
+        stack  = true,
+        close  = false,
+    },
+
+    ['printerdocument'] = {
+        label       = 'Printed Document',
+        weight      = 1000,
+        stack       = false,
+        close       = true,
+        description = nil,
+        client      = { export = "snipe-printer.useDocument" },
+    },
+    ```
+
+=== "Quasar Inventory"
+
+    Set `Config.Inventory = "qs"` in config and add to `qs-core/config/config_items.lua`:
+
+    ```lua
     ["printerdocument"] = {
-        ["name"] = "printerdocument",
-        ["label"] = "Printer Document",                 
-        ["weight"] = 50,         
-        ["type"] = "item",         
-        ["image"] = "printerdocument.png",     
-        ["unique"] = true,         
-        ["useable"] = true,     
-        ["shouldClose"] = true,    
-        ["combinable"] = nil,
+        ["name"]        = "printerdocument",
+        ["label"]       = "Printer Document",
+        ["weight"]      = 50,
+        ["type"]        = "item",
+        ["image"]       = "printerdocument.png",
+        ["unique"]      = true,
+        ["useable"]     = true,
+        ["shouldClose"] = true,
+        ["combinable"]  = nil,
         ["description"] = "Important Document"
     },
     ["a4sheets"] = {
-        ["name"] = "a4sheets",
-        ["label"] = "A4 Sheets",                 
-        ["weight"] = 50,         
-        ["type"] = "item",         
-        ["image"] = "a4sheets.png",     
-        ["unique"] = true,         
-        ["useable"] = true,     
-        ["shouldClose"] = true,    
-        ["combinable"] = nil,
+        ["name"]        = "a4sheets",
+        ["label"]       = "A4 Sheets",
+        ["weight"]      = 50,
+        ["type"]        = "item",
+        ["image"]       = "a4sheets.png",
+        ["unique"]      = true,
+        ["useable"]     = true,
+        ["shouldClose"] = true,
+        ["combinable"]  = nil,
         ["description"] = "Blank Papers to insert into printer"
     },
-```
-- Set `Config.Inventory = "qs"` in config
+    ```
 
-# For QB Inventory
+=== "QB Inventory"
 
- Add items in **items.lua**, code snippet is given below
-```lua
-['printerdocument'] 			 = {['name'] = 'printerdocument', 				['label'] = 'Document', 				['weight'] = 500, 		['type'] = 'item', 		['image'] = 'printer_documents.png', 	['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'A nice document'},
-["a4sheets"] 			 		 = {["name"] = "a4sheets", 						["label"] = "A4Sheets Pack", 			["weight"] = 2000, 		["type"] = "item", 		["image"] = "a4sheets.png", 		    ["unique"] = false, 	["useable"] = false, 	["shouldClose"] = true,	   ["combinable"] = nil,   ["description"] = "A bundle of 20 A4 Sheets"},
-```
-- Update **FormatItemInfo()** function in  _qb-inventory/html/js/**app.js**_ file as mentioned in code snippet
-```javascript
-function FormatItemInfo(itemData) {
+    Set `Config.Inventory = "qb"` and add to `items.lua`:
 
-    //Add else if condition for printerdocument item
-    else if (itemData.name == "printerdocument") {
-        $(".item-info-title").html('<p>'+itemData.label+'</p>')
-        $(".item-info-description").html('<p>'+itemData.info.documentname+'</p><br/>');
+    ```lua
+    ['printerdocument'] = { ['name'] = 'printerdocument', ['label'] = 'Document',     ['weight'] = 500,  ['type'] = 'item', ['image'] = 'printer_documents.png', ['unique'] = true,  ['useable'] = true,  ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'A nice document' },
+    ["a4sheets"]       = { ["name"] = "a4sheets",        ["label"] = "A4Sheets Pack", ["weight"] = 2000, ["type"] = "item", ["image"] = "a4sheets.png",          ["unique"] = false, ["useable"] = false, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "A bundle of 20 A4 Sheets" },
+    ```
+
+    Then patch `FormatItemInfo()` in `qb-inventory/html/js/app.js`:
+
+    ```javascript
+    function FormatItemInfo(itemData) {
+
+        // Add this else-if for printerdocument
+        else if (itemData.name == "printerdocument") {
+            $(".item-info-title").html('<p>'+itemData.label+'</p>')
+            $(".item-info-description").html('<p>'+itemData.info.documentname+'</p><br/>');
+        }
+
     }
+    ```
 
-}
-```
-
-- Set `Config.Inventory = "qb"` in config
-
->Note: For any queries or help regarding installation, [Join our Discord](https://discord.com/invite/VGYkkAYVv2).
+!!! tip
+    For installation help, [join the Discord](https://discord.com/invite/VGYkkAYVv2).

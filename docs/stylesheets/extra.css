@@ -1,0 +1,102 @@
+/* SnipeScripts brand palette */
+:root {
+  --ss-peach: #E8A077;
+  --ss-peach-light: #F4B895;
+  --ss-peach-dark: #D38760;
+
+  --md-primary-fg-color: var(--ss-peach);
+  --md-primary-fg-color--light: var(--ss-peach-light);
+  --md-primary-fg-color--dark: var(--ss-peach-dark);
+  --md-accent-fg-color: var(--ss-peach-dark);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--ss-peach);
+  --md-primary-fg-color--light: var(--ss-peach-light);
+  --md-primary-fg-color--dark: var(--ss-peach-dark);
+  --md-accent-fg-color: var(--ss-peach-light);
+  --md-typeset-a-color: var(--ss-peach-light);
+}
+
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: var(--ss-peach-dark);
+}
+
+/* Header logo bigger so the shield reads well */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.6rem;
+}
+
+/* Hero on the homepage */
+.ss-hero {
+  text-align: center;
+  padding: 3.5rem 1rem 2rem;
+}
+.ss-hero img {
+  max-width: 220px;
+  width: 60%;
+  margin: 0 auto 1rem;
+  display: block;
+}
+.ss-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--ss-peach-light), var(--ss-peach-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0.5rem 0 0.25rem;
+}
+.ss-hero p.tagline {
+  font-size: 1.15rem;
+  opacity: 0.75;
+  margin: 0 0 1.75rem;
+}
+.ss-hero .md-button {
+  margin: 0.25rem 0.35rem;
+}
+.ss-hero .md-button--primary {
+  background: linear-gradient(90deg, var(--ss-peach-light), var(--ss-peach-dark));
+  border-color: transparent;
+  color: #1a1a1a !important;
+}
+.ss-hero .md-button--primary:hover {
+  filter: brightness(1.05);
+}
+
+/* Section heading on homepage */
+.ss-section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.25rem;
+  text-align: center;
+}
+.ss-section-sub {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Grid cards — slightly nicer hover */
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid > .card {
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid > .card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ss-peach);
+  box-shadow: 0 6px 20px -8px rgba(232, 160, 119, 0.45);
+}
+.md-typeset .grid.cards .twemoji,
+.md-typeset .grid > .card .twemoji {
+  color: var(--ss-peach);
+  height: 1.5rem;
+}
+
+/* Code block tweaks */
+.md-typeset code {
+  border-radius: 4px;
+}

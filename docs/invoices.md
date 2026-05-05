@@ -1,29 +1,41 @@
-# Icebox Script
-- Buy here - 
-- Support - https://discord.gg/AeCVP2F8h7
+---
+icon: material/receipt-text
+---
 
-# Steps for installation
+# Invoices
 
-1. Drag and Drop the resource to your server. Make sure it starts at the end of the list so all the dependencies are loaded first.
-2. SQL file is automatically executed on server start.
-3. Go through the config file and check all things to suit your server's need.
+Send and pay invoices between players and businesses.
 
-# Developer Exports
+[:fontawesome-brands-discord: Discord support](https://discord.gg/AeCVP2F8h7){.md-button}
+
+---
+
+## :material-package-down: Installation
+
+1. Drop the resource into your `resources/` folder. Make sure it starts at the **end** of `server.cfg` so all dependencies load first.
+2. SQL is executed automatically on server start.
+3. Read every comment in the config and tune to your server's needs.
+
+## :material-code-tags: Developer exports
+
+### Offline player
 
 ```lua
----@identifier string The identifier of the player to invoice
----@senderIdentifier string The identifier of the player sending the invoice
----@amount number The amount to invoice the player
----@reason string The reason for the invoice
----@job string The job of the player sending the invoice
+---@param identifier        string  Identifier of the player to invoice
+---@param senderIdentifier  string  Identifier of the player sending the invoice
+---@param amount            number  Amount to invoice
+---@param reason            string  Reason for the invoice
+---@param job               string  Job of the sender
 exports["snipe-invoices"]:CreateCustomInvoiceOfflinePlayer(identifier, senderIdentifier, amount, reason, job)
 ```
 
+### Online player
+
 ```lua
----@source number The source of the player receiving the invoice
----@senderIdentifier string The identifier of the player sending the invoice
----@amount number The amount to invoice the player
----@reason string The reason for the invoice
----@job string The job of the player sending the invoice
+---@param source            number  Source of the receiving player
+---@param senderIdentifier  string  Identifier of the player sending the invoice
+---@param amount            number  Amount to invoice
+---@param reason            string  Reason for the invoice
+---@param job               string  Job of the sender
 exports["snipe-invoices"]:CreateCustomInvoiceOnlinePlayer(source, senderIdentifier, amount, reason, job)
 ```

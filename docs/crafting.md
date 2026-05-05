@@ -1,17 +1,34 @@
-# Dependencies: 
-- ox_inventory
-- QB/QBX/Esx
+---
+icon: material/hammer-wrench
+---
 
-# Commands
-- /crafting:admin to open admin crafting options
+# Crafting
 
-# Installation
-- Go through the shared folder properly. There are comments on every line explaining what each thing does.
-- Setup your webhooks in server/open/sv_webhooks.lua
-- Make sure the script starts at the very end in your server.cfg so all the dependencies start before the crafting script.
-- Database tables are installed automatically so no need to run any sql file.
-- All the ui locales are present in html/locales
-- Install the following item. (No image required. Images are configured for blueprints through shared/recipes.lua)
+Recipe-based crafting with blueprints, skill progression, and admin tools.
+
+---
+
+## :material-package-variant-closed: Dependencies
+
+- `ox_inventory`
+- QBCore / QBX / ESX
+
+## :material-console: Commands
+
+| Command | Purpose |
+|---|---|
+| `/crafting:admin` | Open admin crafting options |
+
+## :material-package-down: Installation
+
+- Read every comment in `shared/` — each line is documented.
+- Set up your webhooks in `server/open/sv_webhooks.lua`.
+- **Start the script last** in `server.cfg` so all dependencies load first.
+- Database tables are created automatically — no manual SQL.
+- All UI locales live in `html/locales/`.
+
+Install the blueprint item (no image needed — blueprint images are configured per-recipe in `shared/recipes.lua`):
+
 ```lua
 ["crafting_blueprints"] = {
     label = "Blueprints",
@@ -20,10 +37,13 @@
 },
 ```
 
-# Install Items To Ox Inventory and copy Images (Only required if you use snipe-motel)
-- Install the following items
-- All the images are present in snipe-crafting/images folder
-- If you use snipe-motel, make sure the script starts after snipe-motel. (And also after the framework/ox_lib/target etc). Best option is adding it at the end of the list in your server.cfg
+## :material-table-chair: Crafting tables (snipe-motel only)
+
+!!! note "Only required if you use snipe-motel"
+    Skip this section if you don't have snipe-motel.
+
+- All images are in `snipe-crafting/images/`.
+- **Start order**: snipe-crafting must come **after** snipe-motel (and after framework / ox_lib / target). Best practice — put it last in `server.cfg`.
 
 ```lua
 ["crafting_table_meth"] = {
@@ -33,9 +53,7 @@
     close = true,
     consume = 0,
     description = "Crafting Table",
-    server = {
-        export = "snipe-crafting.placeCraftingTable"
-    }
+    server = { export = "snipe-crafting.placeCraftingTable" }
 },
 
 ["crafting_table_saw"] = {
@@ -45,9 +63,7 @@
     close = true,
     consume = 0,
     description = "Crafting Table",
-    server = {
-        export = "snipe-crafting.placeCraftingTable"
-    }
+    server = { export = "snipe-crafting.placeCraftingTable" }
 },
 
 ["crafting_table_tool"] = {
@@ -57,9 +73,7 @@
     close = true,
     consume = 0,
     description = "Crafting Table",
-    server = {
-        export = "snipe-crafting.placeCraftingTable"
-    }
+    server = { export = "snipe-crafting.placeCraftingTable" }
 },
 
 ["crafting_table_weapon"] = {
@@ -69,9 +83,7 @@
     close = true,
     consume = 0,
     description = "Crafting Table",
-    server = {
-        export = "snipe-crafting.placeCraftingTable"
-    }
+    server = { export = "snipe-crafting.placeCraftingTable" }
 },
 
 ["crafting_table_bigtool"] = {
@@ -81,27 +93,33 @@
     close = true,
     consume = 0,
     description = "Crafting Table",
-    server = {
-        export = "snipe-crafting.placeCraftingTable"
-    }
+    server = { export = "snipe-crafting.placeCraftingTable" }
 },
 ```
 
-# Exports
+## :material-code-tags: Server exports
 
-## Server Side
+Spawn a blueprint for a specific item with a craft limit (the item must be configured in `recipes.lua`):
+
 ```lua
--- to spawn a blueprint for a specific item with limit on how many items can be crafted with that blueprint (Make sure the item is configured in recipes.lua)
-exports["snipe-crafting"]:SpawnSpecificBlueprint(source, item, limit) 
-
---to spawn *howmany* blueprints. The blueprints are spawned randomly and depends on the rarity of the blueprint added in recipes.lua. Make sure you have blueprints for every type otherwise it wont give blueprints sometimes
-exports["snipe-crafting"]:SpawnRandomBlueprints(source, howmany) 
+exports["snipe-crafting"]:SpawnSpecificBlueprint(source, item, limit)
 ```
 
-Eg.
+Spawn N random blueprints based on rarity weights from `recipes.lua`:
 
 ```lua
-exports["snipe-crafting"]:SpawnSpecificBlueprint(source, "weapon_pistol", 5) -- will spawn blueprint for pistol with limit of 5
+exports["snipe-crafting"]:SpawnRandomBlueprints(source, howmany)
+```
 
-exports["snipe-crafting"]:SpawnRandomBlueprints(source, 5)  -- will spawn 5 random blueprints present in recipes.lua
+!!! tip "Make sure every blueprint type exists"
+    `SpawnRandomBlueprints` may sometimes give nothing if some types have no entries in `recipes.lua`.
+
+### Examples
+
+```lua
+-- spawn a pistol blueprint with a limit of 5 crafts
+exports["snipe-crafting"]:SpawnSpecificBlueprint(source, "weapon_pistol", 5)
+
+-- spawn 5 random blueprints
+exports["snipe-crafting"]:SpawnRandomBlueprints(source, 5)
 ```

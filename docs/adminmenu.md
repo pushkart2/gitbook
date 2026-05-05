@@ -1,167 +1,205 @@
-# Step 1 (Config)
+---
+icon: material/shield-crown
+---
 
--- Read the comments in config and only edit the necessary things
+# Admin Menu
 
-# Step 2 (Compatibility)
+A role-based admin panel with permissions, panels, duty system, and developer tools.
 
-## Compatibility
-- Added compatibiltiy for multiple paid scripts. Please read the comments in config_compatibilty.lua and make the changes accordingly.
+!!! abstract "Setup at a glance"
+    Configure → Compatibility → Permissions → Inventory events → optional ESX bans → optional weathersync patch → optional appearance patch → enable Admin Duty → optional locales/keybinds/webhooks → optional exports.
 
-# Step 3 (Permissions)
-## Permissions
-- In Config folder check `permissions.lua`, there are options to set if the particular role for god, admin or mod can access all the panels.
+---
 
-All the roles here can access the admin menu
-Only the GOD can set the panels for the other roles
-There are unlimited options
-1. God -> can access all the commands ( DO NOT REMOVE THIS ROLE )
-2. Others can access panels that the god selects for them
+## :material-cog: Step 1 — Config
 
-If you have a new role, you can add it here and select to give either it any value you want and it will be available in the settings tab for god roles to select the panels for them.
+Read the comments in [config](#) and only edit the necessary things.
 
-eg. `["new_role"] = "God",`
+## :material-puzzle: Step 2 — Compatibility
 
-eg. `["dev"] = "Admin",`
+Compatibility for multiple paid scripts is included. Read the comments in `config_compatibilty.lua` and make the changes accordingly.
+
+## :material-account-key: Step 3 — Permissions
+
+In the `Config` folder check `permissions.lua` — there are options to set whether the **God**, **Admin**, or **Mod** roles can access all the panels.
+
+- Every role here can access the admin menu.
+- Only the **God** role can set the panels for other roles.
+- There are unlimited custom roles.
+
+!!! warning "Do not remove the God role"
+    The `God` role has access to every command and is required for assigning panels to other roles. **Never remove this role.**
+
+If you have a new role, add it here and give it any value you want. It will then be available in the settings tab for God roles to select panels for.
+
+```lua
+["new_role"] = "God",
+["dev"]      = "Admin",
+```
 
 ```lua
 Config.GodRoles = {
-    ["god"] = "God", 
+    ["god"]   = "God",
     ["admin"] = "Admin",
-    ["mod"] = "Moderator",
-    -- if you want to add more roles just add them here
+    ["mod"]   = "Moderator",
+    -- add more roles here
 }
 ```
 
+## :material-package-variant: Step 4 — Inventory
 
-# Step 4 (Inventory)
+=== "QB Inventory / lj-inventory"
 
-## QB Inventory/ lj inventory
+    Add the following events at the **end** of `inventory/client/main.lua`.
 
-- Add the two following events at the end of the inventory/client/main.lua (do not add it at the beginning please!!)
+    !!! danger "Do not add at the beginning"
+        These events must be at the end of the file or they will be overridden.
 
-```lua
-RegisterNetEvent('inventory:client:SetCurrentTrunk', function(vehicle)
-    CurrentVehicle = vehicle
-end)
+    ```lua
+    RegisterNetEvent('inventory:client:SetCurrentTrunk', function(vehicle)
+        CurrentVehicle = vehicle
+    end)
 
-RegisterNetEvent('inventory:client:SetCurrentGlovebox', function(vehicle)
-    CurrentGlovebox = vehicle
-end)
-```
+    RegisterNetEvent('inventory:client:SetCurrentGlovebox', function(vehicle)
+        CurrentGlovebox = vehicle
+    end)
+    ```
 
-# Step 5 (Bans (Only for ESX))
+## :material-gavel: Step 5 — Bans
 
-- Run the `bans.sql` file given in sql folder
+!!! note "ESX only"
+    Skip this step if you are not using ESX.
 
-# Step 6 (QB weathersync)
+Run the `bans.sql` file from the `sql/` folder.
 
-- if you use qb-weathersync, make the following changes in qb-weathersync/server/main.lua
+## :material-weather-partly-cloudy: Step 6 — qb-weathersync
+
+If you use `qb-weathersync`, replace the following function in `qb-weathersync/server/main.lua`:
+
 ```lua
 local function isAllowedToChange(src)
-    if src == 0 or QBCore.Functions.HasPermission(src, "admin") or IsPlayerAceAllowed(src, 'command') or exports["snipe-menu"]:isAdmin(src) then
+    if src == 0
+        or QBCore.Functions.HasPermission(src, "admin")
+        or IsPlayerAceAllowed(src, 'command')
+        or exports["snipe-menu"]:isAdmin(src) then
         return true
     end
     return false
 end
 ```
 
-Replace this function.
+## :material-account-tie: Step 7 — Illenium Appearance + ESX
 
-# Step 7 Only for Illenium Appearance And ESX
+!!! note "ESX + Illenium Appearance only"
+    Only required if you use both ESX **and** illenium-appearance.
 
-Add this following block of code in illenium-appearance/client/framework/esx/compatibility.lua
+Add the block below to `illenium-appearance/client/framework/esx/compatibility.lua`:
+
 ```lua
 RegisterNetEvent("snipe-menu:client:openAppearance", function()
-    local config = GetDefaultConfig()
-    config.ped = true
-    config.headBlend = true
-    config.faceFeatures = true
-    config.headOverlays = true
-    config.components = true
-    config.props = true
-    config.tattoos = true
+    local config           = GetDefaultConfig()
+    config.ped             = true
+    config.headBlend       = true
+    config.faceFeatures    = true
+    config.headOverlays    = true
+    config.components      = true
+    config.props           = true
+    config.tattoos         = true
     OpenShop(config, true, "all")
 end)
 ```
 
-# Step 8 (Admin Duty)
-- With version 3.5.0+, I have implemented a new feature called Admin Duty. This will allow you to go on duty and off duty as an admin.
-- Check config/config_new.lua for the Config Options
-- Check config/permissions.lua for the permissions
-- You need to do /adminduty if you want to use the admin menu. If you are not on duty, you will not be able to use the admin menu.
-- Webhooks for when people go on duty and off duty are also available. You can change the webhook in server/open/sv_webhooks.lua
+## :material-shield-check: Step 8 — Admin Duty
 
-# Step 9 (Optional)
-## How To add new UI Locales
-- Please read each step properly. 
-- To create a new locale, for eg. in language spanish, create a new file in html/locales called for eg. sp.json
-- Copy the contents from en.json and put it in sp.json as is. Then modify it for your language. 
-- Do not change the left side values, only the right side.
+Since version **3.5.0+**, admins must go on duty to use the admin menu.
+
+- Configure: `config/config_new.lua`
+- Permissions: `config/permissions.lua`
+- Toggle duty: `/adminduty`
+- Webhooks for on/off duty available in `server/open/sv_webhooks.lua`
+
+!!! tip
+    If a player can't open the admin menu, they probably forgot `/adminduty`.
+
+## :material-translate: Step 9 — Optional
+
+### Adding a UI locale
+
+1. Create a new file in `html/locales/` (e.g. `sp.json` for Spanish).
+2. Copy the contents of `en.json` into it and translate the **right side** values only.
+3. In `html/config.json`, change `lang` to your file name (e.g. `sp`).
+
 ```json
 "Revive": "Reanimar",
 ```
-- Save the file and go to config.json in html folder and change lang to `sp` since your file is called `sp.json`
-- Do not restart the script right away. Type `refresh` in server console first so it loads the newly created files and press enter and then do `ensure snipe-menu`.
 
-## Keybinds
-- Before starting the script on live server, go through cl_keybinds.lua file and see if you want to change the keybinds. Dont worry if you didnt configure, you can change them through settings. Go to GTA 5 Settings -> Keybinds -> Fivem and look for snipe-menu and change them.
-- I would advise using mouse key for delete laser because it will be easier to access multiple keys.
-- Keybinds only work if the dev mode is on. It can be turned on using the terminal button above the settings and only accessible to GodRoles.
+!!! warning "Don't restart yet"
+    Type `refresh` in the server console first so the new files are loaded, then run `ensure snipe-menu`.
 
-## Discord Logging
-- Change the webhook in sv_webhooks.lua. It logs almost each and every command used and who it was used on. There is not a lot of language options since it will be logged to a discord but you can change some things to your liking in config.
+### Keybinds
 
-## Miscellanuous
-- There are bunch of client/server scripts which are unencrypted which you can edit it to your liking. 
-- I wont be adding supports for other paid scripts but the logic required to edit will be made open if needed.
+- Review `cl_keybinds.lua` before going live, or change them in **GTA 5 Settings → Keybinds → FiveM → snipe-menu**.
+- Mouse keys are recommended for the delete laser.
 
-# Step 10 (Optional Exports)
-## Dev Mode Exports
-- You are provided with two exports, one on client and one server to check if a person is in dev mode
-- Usage (Client)
-```lua
-exports["snipe-menu"]:isDevMode()
-```
-- Usage (Server). Here source is the source/playerid for player
-```lua
-exports["snipe-menu"]:isDevMode(source)
-```
+!!! note "Dev mode only"
+    Keybinds only work when **dev mode** is on (terminal button above the settings — God roles only).
 
-## Admin Perms Exports
-- You are provided with two exports, one on client and one server to check if a person has Admin perms
-- Usage (Client)
-```lua
-exports["snipe-menu"]:isAdmin()
-```
-- Usage (Server). Here source is the source/playerid for player
-```lua
-exports["snipe-menu"]:isAdmin(source)
-```
+### Discord logging
 
-## Spectating
-```lua
-exports["snipe-menu"]:isInSpectating()
-```
+Update the webhook in `sv_webhooks.lua`. Almost every command and target is logged.
 
-## Admin Role Name
+### Miscellaneous
 
-- Returns the role name for player
-- Usage (Server). Here source is the source/playerid for player
-```lua
-exports["snipe-menu"]:GetAdminRoleName(source)
-```
+Some client/server scripts are unencrypted and editable. Support for other paid scripts isn't planned, but the logic needed to integrate is left open where possible.
 
-# Developer Options
+## :material-code-tags: Step 10 — Optional exports
 
-- You can create your own custom panels and add them to the menu. 
-- All the things you need to make changes are in custom folder
-- Check custom_config.lua for all possible options.
-- Available Options for types on components inside a panel are: 
+=== "Dev mode"
 
-1. "string-input" (Input box for string)
-2. "number-input" (Input box for number)
-3. "checkbox" (Checkbox)
-4. "regular-dropdown" (Dropdown with multiple options inside a table). Eg. {"Option 1", "Option 2"}
-5. "searchable-dropdown" (Dropdown with multiple options inside a table with search). Eg. {{id = 1, name = "Option 1"}, {id = 2, name = "Option 2"}}
+    ```lua
+    -- client
+    exports["snipe-menu"]:isDevMode()
 
-- Make sure to check the customs folder for example on how to create a custom panel and register their callbacks.
+    -- server (source = playerId)
+    exports["snipe-menu"]:isDevMode(source)
+    ```
+
+=== "Admin perms"
+
+    ```lua
+    -- client
+    exports["snipe-menu"]:isAdmin()
+
+    -- server (source = playerId)
+    exports["snipe-menu"]:isAdmin(source)
+    ```
+
+=== "Spectating"
+
+    ```lua
+    exports["snipe-menu"]:isInSpectating()
+    ```
+
+=== "Admin role name"
+
+    ```lua
+    -- server (source = playerId)
+    exports["snipe-menu"]:GetAdminRoleName(source)
+    ```
+
+## :material-tools: Developer options
+
+Create your own custom panels and add them to the menu — everything you need is in the `custom/` folder. See `custom_config.lua` for all options.
+
+Available component types inside a panel:
+
+| Type | Description |
+|---|---|
+| `string-input` | Text input |
+| `number-input` | Numeric input |
+| `checkbox` | Boolean checkbox |
+| `regular-dropdown` | Dropdown from a list, e.g. `{"Option 1", "Option 2"}` |
+| `searchable-dropdown` | Searchable dropdown from objects, e.g. `{{id = 1, name = "Option 1"}, {id = 2, name = "Option 2"}}` |
+
+!!! tip
+    Check the `customs/` folder for working examples of custom panels and their callbacks.

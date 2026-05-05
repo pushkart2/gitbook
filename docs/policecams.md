@@ -1,38 +1,48 @@
-# Steps for installation
+---
+icon: material/cctv
+---
 
-1. Drag and Drop the resource to your server. Make sure it starts at the end of the list so all the dependencies are loaded first.
-2. Go through the config file and check all things to suit your server's need.
-3. Images are present inside the assets folder. (Only required if you item based)
+# Police Cams
 
-# Item Based
+Bodycams, dashcams, bait cars, and a police tablet for live camera viewing.
 
-## For QBCore
+---
 
-- Add the following to your `qb-core/shared/items.lua` file:
+## :material-package-down: Installation
 
-```lua
-["bodycam"] 			         = {["name"] = "bodycam", 		["label"] = "Bodycam", 		["weight"] = 2000, 		["type"] = "item", 		["image"] = "bodycam.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Bodycam"},
-["dashcam"]                      = {["name"] = "dashcam", 		["label"] = "Dashcam", 		["weight"] = 2000, 		["type"] = "item", 		["image"] = "dashcam.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Dashcam"},
-["policetablet"]                = {["name"] = "policetablet", 	["label"] = "Police Tablet", 	["weight"] = 2000, 		["type"] = "item", 		["image"] = "policetablet.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Police Tablet"},
-["gpsmodule"]                   = {["name"] = "gpsmodule", 		["label"] = "GPS Module", 	["weight"] = 2000, 		["type"] = "item", 		["image"] = "gpsmodule.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "GPS Module to setup Bait Cars"},
-```
+1. Drop the resource into `resources/`. Make sure it starts at the **end** of `server.cfg`.
+2. Read the config and tune to your server's needs.
+3. Item images are in `assets/` (only needed if you go item-based).
 
-## For ESX
+## :material-package-variant: Item-based
 
-```sql
-INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('bodycam', 'Bodycam', 1, 0, 1) 
-INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('dashcam', 'Dashcam', 1, 0, 1)
-INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('policetablet', 'Police Tablet', 1, 0, 1)
-INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('gpsmodule', 'GPS Module', 1, 0, 1)
-```
+=== "QBCore"
 
-# Command Based
+    Add to `qb-core/shared/items.lua`:
 
-| Commands    | How it works |
-| -------- | ------- |
-| /bodycam  | Puts on/off bodycam    |
-| /dashcam | Install Dashcam     |
-| /baitcar    | Setup Baitcar    |
-| /cams   | View all active cameras    |
-| /removedashcam | Remove Dashcam    |
-| /removebaitcar | Remove Baitcar    |
+    ```lua
+    ["bodycam"]      = { ["name"] = "bodycam",      ["label"] = "Bodycam",       ["weight"] = 2000, ["type"] = "item", ["image"] = "bodycam.png",      ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "Bodycam" },
+    ["dashcam"]      = { ["name"] = "dashcam",      ["label"] = "Dashcam",       ["weight"] = 2000, ["type"] = "item", ["image"] = "dashcam.png",      ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "Dashcam" },
+    ["policetablet"] = { ["name"] = "policetablet", ["label"] = "Police Tablet", ["weight"] = 2000, ["type"] = "item", ["image"] = "policetablet.png", ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "Police Tablet" },
+    ["gpsmodule"]    = { ["name"] = "gpsmodule",    ["label"] = "GPS Module",    ["weight"] = 2000, ["type"] = "item", ["image"] = "gpsmodule.png",    ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "GPS Module to setup Bait Cars" },
+    ```
+
+=== "ESX"
+
+    ```sql
+    INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('bodycam',      'Bodycam',       1, 0, 1);
+    INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('dashcam',      'Dashcam',       1, 0, 1);
+    INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('policetablet', 'Police Tablet', 1, 0, 1);
+    INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('gpsmodule',    'GPS Module',    1, 0, 1);
+    ```
+
+## :material-console: Command-based
+
+| Command | Action |
+|---|---|
+| `/bodycam` | Toggle bodycam on/off |
+| `/dashcam` | Install dashcam |
+| `/baitcar` | Set up a bait car |
+| `/cams` | View all active cameras |
+| `/removedashcam` | Remove dashcam |
+| `/removebaitcar` | Remove bait car |

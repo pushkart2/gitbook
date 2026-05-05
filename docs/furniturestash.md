@@ -1,54 +1,62 @@
-# IMPORTANT
+---
+icon: material/sofa
+---
 
-- Make sure the script starts after snipe-motel
+# Furniture Stash
 
-# Framework
+Place furniture items as stashes inside motel rooms — works as an extension of the snipe-motel system.
 
-- This script only works with QBCore/ESX and support 3 inventories. Ox Inventory, QB Inventory and QS Inventory
+---
 
-# Config
+!!! danger "Start order matters"
+    `snipe-furniturestash` **must start after `snipe-motel`** in `server.cfg`. The stash system depends on the motel system being initialised first.
 
-- Make sure to read the config for all possible options.
+## :material-source-branch: Framework support
 
-# Items
+QBCore and ESX. Inventory support: **Ox Inventory**, **QB Inventory**, **QS Inventory**.
 
-## Ox Inventory
+## :material-cog: Config
 
-```lua
-["furniture_stash_box"] = {
-		label = "Furniture Stash Box",
-		weight = 0,
-		stack = true,
-		close = true,
-		consume = 0,
-		description = "A stash box to store your stuff in",
-		server = {
-			export = "snipe-furniturestash.placeStash"
-		}
-	}
-```
+Read every comment in `config.lua` — it documents every option.
 
-## QB inventory (PS/LJ)
+## :material-package-variant: Items
 
-```lua
-["furniture_stash_box"] = {["name"] = "furniture_stash_box", ["label"] = "Furniture Stash Box", ["weight"] = 0, ["type"] = "item", ["image"] = "furniture_stash_box.png", ["unique"] = true, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "A stash box to store your stuff in"}
-```
+=== "Ox Inventory"
 
-## QS inventory 
+    ```lua
+    ["furniture_stash_box"] = {
+        label       = "Furniture Stash Box",
+        weight      = 0,
+        stack       = true,
+        close       = true,
+        consume     = 0,
+        description = "A stash box to store your stuff in",
+        server      = { export = "snipe-furniturestash.placeStash" }
+    }
+    ```
 
-```lua
-["furniture_stash_box"] = {["name"] = "furniture_stash_box", ["label"] = "Furniture Stash Box", ["weight"] = 0, ["type"] = "item", ["image"] = "furniture_stash_box.png", ["unique"] = true, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "A stash box to store your stuff in"}
-```
+=== "QB / PS / LJ Inventory"
 
-# SQL
+    ```lua
+    ["furniture_stash_box"] = { ["name"] = "furniture_stash_box", ["label"] = "Furniture Stash Box", ["weight"] = 0, ["type"] = "item", ["image"] = "furniture_stash_box.png", ["unique"] = true, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "A stash box to store your stuff in" }
+    ```
 
-- Install the sql file present in the sql folder
+=== "QS Inventory"
 
-# Add new stashes
+    ```lua
+    ["furniture_stash_box"] = { ["name"] = "furniture_stash_box", ["label"] = "Furniture Stash Box", ["weight"] = 0, ["type"] = "item", ["image"] = "furniture_stash_box.png", ["unique"] = true, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "A stash box to store your stuff in" }
+    ```
 
-- To add new stashes, you have to create a new item in your inventory. Depending on the inventory, follow the structure above. If you ox, you will need the export the same way I have added above
-- Create an entry in Config.FurnitureStash in config.lua of the script. Make sure the item name is right and set the size/slot/price etc
+## :material-database: SQL
 
-# FAQ
+Run the SQL file from the `sql/` folder.
 
-- This system only works with my motel system. If the motel system is not started before the furniture stash, it will not work. Make sure to start the motel system before the furniture stash.
+## :material-plus-box: Adding new stash types
+
+1. Create a new item in your inventory using the structure above. For ox_inventory, make sure you copy the `server.export` line so it triggers stash placement.
+2. Add a matching entry to `Config.FurnitureStash` in `config.lua` — set the item name, size, slot count, and price.
+
+## :material-help-circle: FAQ
+
+??? question "My furniture stash isn't working"
+    `snipe-motel` must start **before** `snipe-furniturestash` in `server.cfg`. This system only works with snipe-motel.

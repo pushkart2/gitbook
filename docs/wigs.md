@@ -1,179 +1,109 @@
-# Steps for installation
-1. Install all the items mentioned below based on your inventory
-2. Install the SQL mentioned in SQL-Install-Me folder
-3. Grab the icons from asset folders and put them in your inventory images folder
-4. Go to shared/config.lua, modify the job, inventory, clothing resource name, etc as per the comments mentioned there.
-5. Go to shared/locations.lua to change/add coords for wig testing and wig crafting as well as the items required to craft the wigs.
+---
+icon: material/face-woman
+---
 
+# Wigs
 
-# Install the following items based on your inventory
+A disguise system using wigs and hairstyles, with crafting and dyeing.
 
-## Ox Inventory
+---
 
-```lua
-['wig_hair_bundle'] = {
-	label = 'Wig Hair Bundle',
-},
+## :material-package-down: Installation
 
-['wig_dye'] = {
-    label = 'Wig Dye',
-},
+1. Install all the items below for your inventory.
+2. Run the SQL file from the `SQL-Install-Me` folder.
+3. Copy item icons from `assets/` into your inventory's images folder.
+4. In `shared/config.lua`, set the job, inventory, and clothing-resource names per the inline comments.
+5. In `shared/locations.lua`, configure coords for wig testing and crafting, plus the items required to craft each wig.
 
-['wig_cap'] = {
-    label = 'Wig Cap',
-},
+## :material-package-variant: Items
 
-["wig_glue"] = {
-    label = "Wig Glue",
-    weight = 1,
-    stack = true,
-},
+=== "Ox Inventory"
 
-["wig"] = {
-    label = "Wig",
-    weight = 1,
-    stack = false,
-    server = {
-        export = 'snipe-wigs.useWig',
+    ```lua
+    ['wig_hair_bundle'] = { label = 'Wig Hair Bundle' },
+    ['wig_dye']         = { label = 'Wig Dye' },
+    ['wig_cap']         = { label = 'Wig Cap' },
+
+    ["wig_glue"] = {
+        label  = "Wig Glue",
+        weight = 1,
+        stack  = true,
     },
-    consume = 0,
-}
-```
 
-## QS Inventory
+    ["wig"] = {
+        label   = "Wig",
+        weight  = 1,
+        stack   = false,
+        server  = { export = 'snipe-wigs.useWig' },
+        consume = 0,
+    }
+    ```
 
-```lua
-['wig'] = {
-    ['name'] = 'wig',
-    ['label'] = 'Wig',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig.png',
-    ['unique'] = true,
-    ['useable'] = true,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
+=== "QB Inventory"
 
-['wig_hair_bundle'] = {
-    ['name'] = 'wig_hair_bundle',
-    ['label'] = 'Wig Hair Bundle',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig_hair_bundle.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
+    ```lua
+    ['wig'] = {
+        ['name'] = 'wig', ['label'] = 'Wig', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig.png', ['unique'] = true, ['useable'] = true,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
 
-['wig_dye'] = {
-    ['name'] = 'wig_dye',
-    ['label'] = 'Wig Dye',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig_dye.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
+    ['wig_hair_bundle'] = {
+        ['name'] = 'wig_hair_bundle', ['label'] = 'Wig Hair Bundle', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig_hair_bundle.png', ['unique'] = false, ['useable'] = false,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
 
-['wig_cap'] = {
-    ['name'] = 'wig_cap',
-    ['label'] = 'Wig Cap',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig_cap.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
+    ['wig_dye'] = {
+        ['name'] = 'wig_dye', ['label'] = 'Wig Dye', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig_dye.png', ['unique'] = false, ['useable'] = false,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
+
+    ['wig_cap'] = {
+        ['name'] = 'wig_cap', ['label'] = 'Wig Cap', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig_cap.png', ['unique'] = false, ['useable'] = false,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
 
     ['wig_glue'] = {
-    ['name'] = 'wig_glue',
-    ['label'] = 'Wig Glue',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig_glue.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
-```
+        ['name'] = 'wig_glue', ['label'] = 'Wig Glue', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig_glue.png', ['unique'] = false, ['useable'] = false,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
+    ```
 
-## QB Inventory
+=== "QS Inventory"
 
-```lua
-['wig'] = {
-    ['name'] = 'wig',
-    ['label'] = 'Wig',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig.png',
-    ['unique'] = true,
-    ['useable'] = true,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
+    ```lua
+    ['wig'] = {
+        ['name'] = 'wig', ['label'] = 'Wig', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig.png', ['unique'] = true, ['useable'] = true,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
 
-['wig_hair_bundle'] = {
-    ['name'] = 'wig_hair_bundle',
-    ['label'] = 'Wig Hair Bundle',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig_hair_bundle.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
+    ['wig_hair_bundle'] = {
+        ['name'] = 'wig_hair_bundle', ['label'] = 'Wig Hair Bundle', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig_hair_bundle.png', ['unique'] = false, ['useable'] = false,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
 
-['wig_dye'] = {
-    ['name'] = 'wig_dye',
-    ['label'] = 'Wig Dye',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig_dye.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
+    ['wig_dye'] = {
+        ['name'] = 'wig_dye', ['label'] = 'Wig Dye', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig_dye.png', ['unique'] = false, ['useable'] = false,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
 
-['wig_cap'] = {
-    ['name'] = 'wig_cap',
-    ['label'] = 'Wig Cap',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig_cap.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
+    ['wig_cap'] = {
+        ['name'] = 'wig_cap', ['label'] = 'Wig Cap', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig_cap.png', ['unique'] = false, ['useable'] = false,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
 
     ['wig_glue'] = {
-    ['name'] = 'wig_glue',
-    ['label'] = 'Wig Glue',
-    ['weight'] = 150,
-    ['type'] = 'item',
-    ['image'] = 'wig_glue.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['combinable'] = nil,
-    ['description'] = 'none'
-},
-```
+        ['name'] = 'wig_glue', ['label'] = 'Wig Glue', ['weight'] = 150, ['type'] = 'item',
+        ['image'] = 'wig_glue.png', ['unique'] = false, ['useable'] = false,
+        ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'none'
+    },
+    ```

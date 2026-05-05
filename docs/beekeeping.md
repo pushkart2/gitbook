@@ -1,60 +1,68 @@
-# Installation
+---
+icon: material/bee
+---
 
-- Configure the config properly based on the framework
-- Images are present in assets folder
+# Beekeeping
 
-# Ox Inventory
+Manage hives, harvest honey, and produce wax/jelly for sale.
 
-## Item
+---
 
-```lua
-	['beehive'] = { 
-		label = 'Beehive',
-		weight = 1,
-		stack = false,
-		consume = 0,
-		server = {
-			export = 'snipe-beekeeping.PlaceBeehive'
-		},
-	},
+## :material-package-down: Installation
 
-	['queen_bee'] = { 
-		label = 'Queen Bee',
-		weight = 1,
-		stack = true,
-		consume = 0,
-	},
+- Configure the config based on your framework.
+- Item images are in the `assets/` folder.
 
-	['honey'] = { 
-		label = 'Honey',
-		weight = 1,
-		stack = true,
-		consume = 0,
-	},
+## :material-package-variant: Items
 
-	['wax'] = { 
-		label = 'Wax',
-		weight = 1,
-		stack = true,
-		consume = 0,
-	},
+=== "Ox Inventory"
 
-	['jelly'] = { 
-		label = 'Jelly',
-		weight = 1,
-		stack = true,
-		consume = 0,
-	},
-```
+    ```lua
+    ['beehive'] = {
+        label = 'Beehive',
+        weight = 1,
+        stack = false,
+        consume = 0,
+        server = {
+            export = 'snipe-beekeeping.PlaceBeehive'
+        },
+    },
 
-# QB Inventory
+    ['queen_bee'] = {
+        label = 'Queen Bee',
+        weight = 1,
+        stack = true,
+        consume = 0,
+    },
 
-## Items
+    ['honey'] = {
+        label = 'Honey',
+        weight = 1,
+        stack = true,
+        consume = 0,
+    },
 
-```lua
-["beehive"] 			         = {["name"] = "beehive", 		["label"] = "Beehive", 		["weight"] = 2000, 		["type"] = "item", 		["image"] = "beehive.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Beehive"},
-["queen_bee"] 			         = {["name"] = "queen_bee", 		["label"] = "Queen Bee", 		["weight"] = 2000, 		["type"] = "item", 		["image"] = "queen_bee.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Beehive"},
-["honey"] 			         = {["name"] = "honey", 		["label"] = "Honey", 		["weight"] = 2000, 		["type"] = "item", 		["image"] = "honey.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Beehive"},
-["wax"] 			         = {["name"] = "wax", 		["label"] = "Wax", 		["weight"] = 2000, 		["type"] = "item", 		["image"] = "wax.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Beehive"},
-["jelly"] 			         = {["name"] = "jelly", 		["label"] = "Jelly", 		["weight"] = 2000, 		["type"] = "item", 		["image"] = "jelly.png", ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   	["combinable"] = nil,   ["description"] = "Beehive"},
-```
+    ['wax'] = {
+        label = 'Wax',
+        weight = 1,
+        stack = true,
+        consume = 0,
+    },
+
+    ['jelly'] = {
+        label = 'Jelly',
+        weight = 1,
+        stack = true,
+        consume = 0,
+    },
+    ```
+
+=== "QB Inventory"
+
+    ```lua
+    ["beehive"]   = { ["name"] = "beehive",   ["label"] = "Beehive",   ["weight"] = 2000, ["type"] = "item", ["image"] = "beehive.png",   ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "Beehive" },
+    ["queen_bee"] = { ["name"] = "queen_bee", ["label"] = "Queen Bee", ["weight"] = 2000, ["type"] = "item", ["image"] = "queen_bee.png", ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "Queen Bee" },
+    ["honey"]     = { ["name"] = "honey",     ["label"] = "Honey",     ["weight"] = 2000, ["type"] = "item", ["image"] = "honey.png",     ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "Honey" },
+    ["wax"]       = { ["name"] = "wax",       ["label"] = "Wax",       ["weight"] = 2000, ["type"] = "item", ["image"] = "wax.png",       ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "Wax" },
+    ["jelly"]     = { ["name"] = "jelly",     ["label"] = "Jelly",     ["weight"] = 2000, ["type"] = "item", ["image"] = "jelly.png",     ["unique"] = false, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "Jelly" },
+    ```
