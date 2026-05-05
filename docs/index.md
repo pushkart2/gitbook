@@ -10,7 +10,7 @@ hide:
 
 # SnipeScripts
 
-<p class="tagline">Premium FiveM scripts for Qbox</p>
+<p class="tagline">Premium FiveM Scripts</p>
 
 [:fontawesome-solid-cart-shopping: &nbsp;Tebex Store](https://snipe.tebex.io){.md-button .md-button--primary}
 [:fontawesome-brands-discord: &nbsp;Discord](https://discord.gg/AeCVP2F8h7){.md-button}
