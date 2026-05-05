@@ -383,7 +383,7 @@ exports('RegisterInventory', RegisterInventory)
   'Pacific/Wallis',
   'Pacific/Apia',
   'Africa/Johannesburg'
-  ```
+```
 
 # Developer Options
 ## Commands
@@ -401,6 +401,7 @@ exports('RegisterInventory', RegisterInventory)
 - This new table can help track exploiters who use network lag switches to claim same transaction id multiple times.
 - Use the query mentioned below and run it every now and then to track down people that claimed more gems than they were supposed to. 
 - It will be empty if its unable to find any exploited player
+
 ```sql
 SELECT 
     c.transaction_id,
