@@ -358,6 +358,155 @@ Full-featured banking with personal accounts, job/gang accounts, loans, transact
 | `OpenBank()` | Opens the bank UI without a progress bar. |
 | `OpenATM()` | Opens the ATM UI without a progress bar. |
 
+## :material-palette: Theming
+
+The bank UI reads its colors from `shared/themes.lua`. Edit any value, restart the resource (or rebuild the UI), and the colors apply across every tab — header, dial, tabs, transactions, modals, graph.
+
+```lua
+Theme = {
+    accent          = "#00C896",   -- titles, active tab, primary CTAs, rails
+    secondaryAccent = "#3DD9B3",   -- user chip, frozen status, hover accents
+    positive        = "#00C896",   -- success / positive amounts / deposit row
+    negative        = "#EF4444",   -- danger / withdraw / errors
+    info            = "#38BDF8",   -- transfer button + info chips
+    highlight       = "#F59E0B",   -- export button + amber log entries
+    background      = "#050505",   -- page background
+    panel           = "#101214",   -- card / panel surface
+    text            = "#F5F7FA",   -- primary text
+    mutedText       = "#7B8496"    -- muted / secondary text
+}
+```
+
+!!! tip "Each entry is a single hex"
+    You only need a single hex per slot. The UI derives every alpha variant (06%, 12%, 22%, 30%, 55%, etc.) for borders, glows, and surfaces automatically.
+
+!!! abstract "How it works"
+    On UI mount, the Svelte app calls a `getTheme` NUI callback. The client returns the `Theme` table from `shared/themes.lua`. The UI converts each hex to an RGB triple and writes it into the matching CSS variable (`--accent-rgb`, `--secondary-rgb`, etc.). All theme-aware tokens (`--yellow-1`, `--blue-1`, `--green-1`, `--card-bg`, ...) are derived from those triples, so a single update cascades everywhere.
+
+!!! example "Preset palettes"
+    Swap the table out wholesale for a different feel. A few starters:
+
+    === "Royal violet"
+
+        ```lua
+        Theme = {
+            accent = "#A78BFA", 
+            secondaryAccent = "#C4B5FD",
+            positive = "#10B981", 
+            negative = "#FB7185",
+            info = "#60A5FA", 
+            highlight = "#FDE68A",
+            background = "#0A0612", 
+            panel = "#15091F",
+            text = "#F8FAFC", 
+            mutedText = "#94A3B8"
+        }
+        ```
+
+    === "Warm bronze"
+
+        ```lua
+        Theme = {
+            accent = "#F59E0B", 
+            secondaryAccent = "#FDE68A",
+            positive = "#10B981", 
+            negative = "#EF4444",
+            info = "#38BDF8", 
+            highlight = "#FBBF24",
+            background = "#0B0907", 
+            panel = "#160E08",
+            text = "#FDF6E3", 
+            mutedText = "#A8A29E"
+        }
+        ```
+
+    === "Cyber cyan"
+
+        ```lua
+        Theme = {
+            accent = "#22D3EE", 
+            secondaryAccent = "#67E8F9",
+            positive = "#10B981", 
+            negative = "#F87171",
+            info = "#60A5FA", 
+            highlight = "#FACC15",
+            background = "#020617", 
+            panel = "#0F172A",
+            text = "#F1F5F9", 
+            mutedText = "#94A3B8"
+        }
+        ```
+
+## :material-credit-card-check: Credit score
+
+A loan-derived credit score (FICO-style, **300–850**) per player. Built into the bank UI as the **CREDIT** tab with a score dial, 8-week history graph, breakdown, and audit log. Designed to be read and mutated by other resources (dealerships, courts, insurance, etc.) via exports.
+
+!!! abstract "How the score is built"
+    Every player starts at the configured base (**650** by default). Their current score is recomputed live as:
+
+    `score = clamp(base + loanComponent + manualAdjustments, 300, 850)`
+
+    - **loanComponent** is derived from existing loan data — paid-off loans, early closures, active loans in good standing, and missed installments.
+    - **manualAdjustments** is the sum of every `AddCreditScore` / `RemoveCreditScore` / `SetManualCreditScore` call from any resource. Every change is recorded in an audit log.
+    - A weekly snapshot is taken on **every server start / resource restart** for any player overdue, powering the history graph.
+
+### Configuration
+
+The `Config.CreditScore` block in `shared/config.lua` controls range, snapshot cadence, and per-signal weights:
+
+```lua
+Config.CreditScore = {
+    ShowUI = true,
+    Base = 650,
+    Min = 300,
+    Max = 850,
+    SnapshotIntervalDays = 7,
+    Weights = {
+        loanPaidOff           = 30,
+        loanClosedEarly       = 15,
+        missedInstallment     = -10,
+        activeGoodStanding    =  5,
+        loanDeclined          =  0
+    }
+}
+```
+
+!!! tip "Disabling the UI"
+    Set `ShowUI = false` to hide the CREDIT tab while keeping the exports available for other resources.
+
+### Server exports
+
+All exports accept an `identifier` argument that is either a **citizenid / framework identifier string** or a **player source number** — resolved internally. Mutators return the new clamped total so callers don't need a follow-up `Get`. Every mutation is written to `banking_credit_score_log` with the calling resource recorded (taken from `GetInvokingResource()` if you don't pass one explicitly).
+
+| Export | Description |
+|---|---|
+| `GetCreditScore(identifier)` | Returns the current clamped total score. Session-cached for 60s. |
+| `GetCreditScoreBreakdown(identifier)` | Returns `{ base, fromLoans, manual, total, signals = { paidOff, closedEarly, activeGoodStanding, missedInstallments, declined } }`. Always fresh. |
+| `AddCreditScore(identifier, amount, reason, sourceResource?)` | Increases the player's manual adjustment by `amount` (positive). Returns the new total. |
+| `RemoveCreditScore(identifier, amount, reason, sourceResource?)` | Decreases the player's manual adjustment by `amount` (positive). Returns the new total. |
+| `SetManualCreditScore(identifier, targetTotal, reason, sourceResource?)` | Overrides `manual_adjustment` so that the **final clamped total** matches `targetTotal`. Returns the new total. |
+| `GetCreditScoreHistory(identifier, limit?)` | Returns recent audit-log rows: `{ delta, reason, source_resource, created_at }`. Default limit `25`. |
+| `GetCreditScoreSnapshots(identifier, weeks?)` | Returns weekly snapshots for the history graph: `{ score, snapshot_at, delta }`. Default `8` weeks. |
+| `InvalidateCreditScore(identifier)` | Clears the 60s session cache for an identifier. Optional — caches refresh automatically. |
+
+### Usage example
+
+```lua
+local citizenid = QBCore.Functions.GetPlayer(source).PlayerData.citizenid
+
+local score = exports['snipe-banking']:GetCreditScore(citizenid)
+if score < 600 then
+    TriggerClientEvent('ox_lib:notify', source, { type = 'error', description = 'Your credit score is too low for this purchase.' })
+    return
+end
+
+local newTotal = exports['snipe-banking']:AddCreditScore(citizenid, 25, 'Completed contract', 'my-resource')
+print(('Player credit is now %d'):format(newTotal))
+```
+
+!!! warning "Snapshots only run on server restart"
+    The history graph fills as the resource restarts. For typical FiveM ops (daily/weekly restarts) snapshots accumulate naturally. If your server stays up longer than `SnapshotIntervalDays`, no new snapshot is taken until the next restart.
+
 ## :material-help-circle: FAQ
 
 ??? question "I froze a player's account but they can still buy things"
