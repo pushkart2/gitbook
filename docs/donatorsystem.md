@@ -10,7 +10,7 @@ Tebex-integrated donation rewards: gems/coins, daily shop, packages, and exploit
 
 ## :material-store: Step 1 — Tebex store setup
 
-Add this command to every Tebex package — it tells the script which package was bought and who bought it. [Video walkthrough](https://www.youtube.com/watch?v=t7toRSVcGAk&feature=youtu.be).
+Add this command to every Tebex package — it tells the script which package was bought and who bought it. [Video walkthrough](https://youtu.be/KMkVnL0Ur5U).
 
 ```lua
 package_bought {"transaction_id":"{transaction}", "package":"{packageName}", "buyer_name":"{purchaserName}", "buyer_email":"{email}"}
