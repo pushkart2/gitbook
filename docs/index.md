@@ -72,6 +72,14 @@ hide:
 
     [:octicons-arrow-right-24: Open](multijob.md)
 
+-   :material-office-building-cog:{ .lg } &nbsp; **Company Manager**
+
+    ---
+
+    Modern boss menu — hire/fire, grades, funds, and transaction logs.
+
+    [:octicons-arrow-right-24: Open](companymanager.md)
+
 </div>
 
 ### :material-flask: Crafting & Production

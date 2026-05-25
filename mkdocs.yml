@@ -82,6 +82,7 @@ extra:
 nav:
   - Home: index.md
   - Restaurants: restaurants.md
+  - Company Manager: companymanager.md
   - Crafting: crafting.md
   - DonatorSystem: donatorsystem.md
   - Evidence System: evidence.md
