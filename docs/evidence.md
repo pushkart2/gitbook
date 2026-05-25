@@ -213,6 +213,9 @@ exports["snipe-evidence"]:RemoveBacLevel(level)              -- remove BAC
 exports["snipe-evidence"]:Camera3DTextExport()               -- start the 3D-text thread (call once when enabling camera)
 exports["snipe-evidence"]:Toggle3DText()                     -- toggle visibility
 exports["snipe-evidence"]:StopCamera3DTextThread()           -- stop the thread
+
+-- Open Recreate from your custom script
+exports["snipe-evidence"]:RecreateCrimeScene(crimesceneid)   -- you have to pass in the uuid of the crime scene which is stored in database
 ```
 
 ### Server
