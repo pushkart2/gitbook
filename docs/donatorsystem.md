@@ -46,6 +46,50 @@ end
 exports('RegisterInventory', RegisterInventory)
 ```
 
+## :material-palette: Step 4 — Theme
+
+The donator UI is fully themed from a single file: **`shared/themes.lua`**. Every colour token in the UI is derived from this table — change a value here and the entire UI follows.
+
+```lua
+Theme = {
+    accent          = "#00C896",  -- titles, primary CTAs, active accents, rails
+    secondaryAccent = "#3DD9B3",  -- secondary tags / badges, soft accents
+    positive        = "#00C896",  -- success / positive states
+    negative        = "#EF4444",  -- danger / delete / errors
+    info            = "#38BDF8",  -- info chips, totals, blue accents
+    highlight       = "#F59E0B",  -- gems / price / amber highlights
+    background      = "#050505",  -- page background
+    panel           = "#101214",  -- card / panel surface
+    text            = "#F5F7FA",  -- primary text
+    mutedText       = "#7B8496"   -- muted / secondary text
+}
+```
+
+!!! tip "How it works"
+    The UI calls a `getTheme` NUI callback on load, the hex values get converted to RGB triples, and `:root` CSS variables (`--accent-rgb`, `--panel-rgb`, etc.) are overridden at runtime. Every CSS token used across the UI is derived from those triples — no rebuild required.
+
+### Example — purple palette
+
+A commented-out alternate palette is shipped in `shared/themes.lua`. Uncomment it (and comment out the green one) to switch the entire UI to purple:
+
+```lua
+Theme = {
+    accent          = "#A855F7",
+    secondaryAccent = "#C4B5FD",
+    positive        = "#22C55E",
+    negative        = "#FB7185",
+    info            = "#22D3EE",
+    highlight       = "#FBBF24",
+    background      = "#0B0712",
+    panel           = "#181226",
+    text            = "#F5F3FF",
+    mutedText       = "#8B82A6"
+}
+```
+
+!!! note "Colour format"
+    Values must be **hex** (`#RRGGBB` or `#RGB`). Anything else is ignored and the CSS default kicks in.
+
 ## :material-clock-outline: Daily shop time zones
 
 Use any of these strings as `Config.DailyShop.time_zone`.
