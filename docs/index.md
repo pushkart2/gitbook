@@ -148,6 +148,14 @@ hide:
 
     [:octicons-arrow-right-24: Open](adminmenu.md)
 
+-   :material-flask-empty-outline:{ .lg } &nbsp; **Admin Menu (Beta)**
+
+    ---
+
+    Beta build — adds the full Tickets / Reports system, screenshots, ratings.
+
+    [:octicons-arrow-right-24: Open](adminmenu-beta.md)
+
 -   :material-fingerprint:{ .lg } &nbsp; **Evidence System**
 
     ---
