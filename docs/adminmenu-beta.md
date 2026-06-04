@@ -10,7 +10,7 @@ A role-based admin panel with permissions, panels, duty system, developer tools,
     This page documents the **beta** version of `snipe-menu`. It includes everything from the stable [Admin Menu](adminmenu.md) docs plus the new beta features highlighted with a 🧪 beta badge. The UI, config, and database schema may shift between updates. Please report feedback in the Discord `#snipe-menu-beta` thread.
 
 !!! abstract "Setup at a glance"
-    Configure → Compatibility → Permissions → Inventory events → optional ESX bans → optional weathersync patch → optional appearance patch → enable Admin Duty → **Reports / Tickets (beta)** → optional locales/keybinds/webhooks → optional exports.
+    Configure → Compatibility → Permissions → Inventory events → optional ESX bans → optional weathersync patch → optional appearance patch → enable Admin Duty → optional door-spawning convar → **Reports / Tickets (beta)** → optional locales/keybinds/webhooks → optional exports.
 
 ---
 
@@ -124,7 +124,17 @@ Since version **3.5.0+**, admins must go on duty to use the admin menu.
 !!! tip
     If a player can't open the admin menu, they probably forgot `/adminduty`.
 
-## :material-message-text: Step 9 — Reports & Tickets &nbsp;:material-flask-empty-outline:{ title="Beta" }
+## :material-door: Step 9 — Dynamic door spawning &nbsp;:material-flask-empty-outline:{ title="Beta" }
+
+!!! note "Only required if admins will spawn doors in-game"
+
+GTA's dynamic door creation is gated behind a server convar. Add the line below to `server.cfg` so the doors admins place from the menu actually register at runtime:
+
+```cfg
+setr game_enableDynamicDoorCreation "true"
+```
+
+## :material-message-text: Step 10 — Reports & Tickets &nbsp;:material-flask-empty-outline:{ title="Beta" }
 
 The old report/reply flow has been replaced with a dedicated **Tickets** system. It runs on a standalone UI, with categories, quick-replies, screenshot attachments, participants, and post-close admin ratings.
 
@@ -248,7 +258,7 @@ After a ticket is closed:
 ??? question "How do I migrate existing categories/presets?"
     There's nothing to migrate — the old report system didn't have these concepts. The 4 defaults are seeded automatically, and gods can extend them from the UI.
 
-## :material-translate: Step 10 — Optional
+## :material-translate: Step 11 — Optional
 
 ### Adding a UI locale
 
@@ -279,7 +289,7 @@ Update the webhook in `sv_webhooks.lua`. Almost every command and target is logg
 
 Some client/server scripts are unencrypted and editable. Support for other paid scripts isn't planned, but the logic needed to integrate is left open where possible.
 
-## :material-code-tags: Step 11 — Optional exports
+## :material-code-tags: Step 12 — Optional exports
 
 === "Dev mode"
 
