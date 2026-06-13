@@ -36,6 +36,63 @@ Bodycams, dashcams, bait cars, and a police tablet for live camera viewing.
     INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES ('gpsmodule',    'GPS Module',    1, 0, 1);
     ```
 
+=== "OX Inventory"
+
+```lua
+
+['bodycam'] = { 
+		label = 'Body Cam', 
+		weight = 300, 
+		stack = false, 
+		close = true, 
+		description = 'A wearable camera used by law enforcement to record interactions',
+		client = { image = 'bodycam.png' }, 
+		consume = 0,
+		server = {
+			export = "snipe-policecams.useBodycam"
+		}
+	},
+
+	['dashcam'] = { 
+	label = 'Dash Cam', 
+	weight = 500, 
+	stack = false, 
+	close = true, 
+	description = 'A vehicle-mounted camera that records the road ahead', 
+	client = { image = 'dashcam.png' }, 
+	consume = 0,
+	server = {
+		export = "snipe-policecams.useDashcam"
+	}
+},
+
+	['gpsmodule'] = { 
+		label = 'GPS Module', 
+		weight = 200, 
+		stack = true, 
+		close = false, 
+		description = 'A tracking device used to monitor vehicle or player location', 
+		client = { image = 'gpsmodule.png' }, 
+		consume = 0,
+		server = {
+			export = "snipe-policecams.useGpsModule"
+		}
+	},
+
+	["policetablet"] = {
+		label = "Police Tablet",
+		weight = 300,
+		stack = false,
+		close = true,
+		description = "A tablet used by police officers to access various functions and information",
+		client = { image = 'policetablet.png' },
+		consume = 0,
+		server = {
+			export = "snipe-policecams.useTablet"
+		}
+	},
+```
+
 ## :material-console: Command-based
 
 | Command | Action |
