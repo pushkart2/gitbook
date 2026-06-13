@@ -40,19 +40,19 @@ Bodycams, dashcams, bait cars, and a police tablet for live camera viewing.
 
     ```lua
     ['bodycam'] = { 
-            label = 'Body Cam', 
-            weight = 300, 
-            stack = false, 
-            close = true, 
-            description = 'A wearable camera used by law enforcement to record interactions',
-            client = { image = 'bodycam.png' }, 
-            consume = 0,
-            server = {
-                export = "snipe-policecams.useBodycam"
-            }
-        },
+        label = 'Body Cam', 
+        weight = 300, 
+        stack = false, 
+        close = true, 
+        description = 'A wearable camera used by law enforcement to record interactions',
+        client = { image = 'bodycam.png' }, 
+        consume = 0,
+        server = {
+            export = "snipe-policecams.useBodycam"
+        }
+    },
 
-        ['dashcam'] = { 
+    ['dashcam'] = { 
         label = 'Dash Cam', 
         weight = 500, 
         stack = false, 
@@ -65,31 +65,31 @@ Bodycams, dashcams, bait cars, and a police tablet for live camera viewing.
         }
     },
 
-        ['gpsmodule'] = { 
-            label = 'GPS Module', 
-            weight = 200, 
-            stack = true, 
-            close = false, 
-            description = 'A tracking device used to monitor vehicle or player location', 
-            client = { image = 'gpsmodule.png' }, 
-            consume = 0,
-            server = {
-                export = "snipe-policecams.useGpsModule"
-            }
-        },
+    ['gpsmodule'] = { 
+        label = 'GPS Module', 
+        weight = 200, 
+        stack = true, 
+        close = false, 
+        description = 'A tracking device used to monitor vehicle or player location', 
+        client = { image = 'gpsmodule.png' }, 
+        consume = 0,
+        server = {
+            export = "snipe-policecams.useGpsModule"
+        }
+    },
 
-        ["policetablet"] = {
-            label = "Police Tablet",
-            weight = 300,
-            stack = false,
-            close = true,
-            description = "A tablet used by police officers to access various functions and information",
-            client = { image = 'policetablet.png' },
-            consume = 0,
-            server = {
-                export = "snipe-policecams.useTablet"
-            }
-        },
+    ["policetablet"] = {
+        label = "Police Tablet",
+        weight = 300,
+        stack = false,
+        close = true,
+        description = "A tablet used by police officers to access various functions and information",
+        client = { image = 'policetablet.png' },
+        consume = 0,
+        server = {
+            export = "snipe-policecams.useTablet"
+        }
+    },
     ```
 
 ## :material-console: Command-based
