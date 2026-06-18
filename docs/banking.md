@@ -82,6 +82,21 @@ Full-featured banking with personal accounts, job/gang accounts, loans, transact
     3. Personal balances → bank, job money → snipe-banking tables.
     4. Restart the server.
 
+=== "tgg-banking"
+
+    !!! tip "Drop-in exports"
+        `snipe-banking` ships compat exports for `tgg-banking` (`GetSocietyAccount`, `AddSocietyMoney`, `RemoveSocietyMoney`). Any script calling `exports['tgg-banking']:...` keeps working after migration — no code changes needed on those scripts.
+
+    1. Restart with no players connected.
+    2. Run `converttgg` in the server console.
+    3. The script reads `tgg_banking_accounts` and migrates:
+        - **Personal balances** (`type = 'shared'`) → each owner's framework bank account (`players.money.bank` for qb/qbx, `users.accounts.bank` for esx).
+        - **Business funds** (`type = 'business'`) → snipe-banking's `banking_accounts` table.
+    4. Restart the server.
+
+    !!! note "Old table not auto-cleaned"
+        `converttgg` does **not** drop or empty `tgg_banking_accounts`. Verify balances post-migration, then archive or drop the old table manually. Do not run the command TWICE!!!!
+
 ## :material-source-branch: Framework patches
 
 === "QBCore"
